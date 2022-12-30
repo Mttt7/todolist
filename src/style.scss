@@ -25,13 +25,13 @@ $font-color:rgb(31, 31, 31);
     //-----responsive navbar-----//
     .responsive-nav{
             margin-left: auto;
-
+            margin-top: 5px;
         >*{
     
             display: block;
-            width: 55px;
-            height: 7px;
-            margin-bottom: 11px;
+            width: 50px;
+            height: 6px;
+            margin-bottom: 9px;
             position: relative;
         
             background-color: white;
@@ -58,18 +58,8 @@ $font-color:rgb(31, 31, 31);
     }
 
 }
-//MEDIA QUERIES//
-@media only screen and (max-width:700px){
-    .responsive-nav{
-        display: none;
-    }
-
-    .header{
-        background-color: blue;
-    }
 
 
-}
 
 .nav-bar{
     background-color: $color3;
@@ -117,7 +107,20 @@ $font-color:rgb(31, 31, 31);
 }
 
 
+//MEDIA QUERIES//
+@media only screen and (min-width:701px){
+    .responsive-nav{
+        display: none;
+        
+    }
+    
+}
 
+@media only screen and (max-width:700px){
+    .nav-bar{
+        display: none;
+    }
+}
 
 
 

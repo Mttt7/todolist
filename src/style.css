@@ -17,12 +17,13 @@
 }
 .header .responsive-nav {
   margin-left: auto;
+  margin-top: 5px;
 }
 .header .responsive-nav > * {
   display: block;
-  width: 55px;
-  height: 7px;
-  margin-bottom: 11px;
+  width: 50px;
+  height: 6px;
+  margin-bottom: 9px;
   position: relative;
   background-color: white;
   border-radius: 6px;
@@ -41,14 +42,6 @@
   transform: translate(-3px, 3px) rotate(-45deg);
 }
 
-@media only screen and (max-width: 700px) {
-  .responsive-nav {
-    display: none;
-  }
-  .header {
-    background-color: blue;
-  }
-}
 .nav-bar {
   background-color: rgb(244, 238, 238);
   font-size: 1.35rem;
@@ -83,6 +76,16 @@
   grid-column: 2/3;
 }
 
+@media only screen and (min-width: 701px) {
+  .responsive-nav {
+    display: none;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .nav-bar {
+    display: none;
+  }
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
