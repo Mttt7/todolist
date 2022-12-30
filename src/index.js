@@ -2,6 +2,9 @@ import './style.css';
 import githubImg from './images/githublogo.png'
 import igImg from './images/iglogo.png'
 
+
+
+
 const GithubImg = new Image()
 const IgImg = new Image()
 GithubImg.src = githubImg
@@ -11,6 +14,28 @@ function createHeader(){
     const header = document.createElement('div')
     header.classList.add("header")
         header.textContent="To do List"
+
+
+
+    //reponsive navbar//
+    const reponsiveNav = document.createElement('div')
+    reponsiveNav.classList.add('responsive-nav')
+            for(let i=0;i<3;i++){
+                const line = document.createElement('span')
+                //line.classList.add('line')
+                reponsiveNav.appendChild(line)
+            }
+
+            reponsiveNav.addEventListener('click',function(){
+                this.classList.toggle('is-active')
+            })
+
+
+
+
+            header.appendChild(reponsiveNav)
+
+
 
     return header
 }
@@ -68,6 +93,10 @@ function createNavBar(){
                 IgImg.addEventListener('click',()=>{
                     window.open("https://www.instagram.com/mtt.jpeg/","_self")
                 })
+
+
+        
+        
 
 
 
