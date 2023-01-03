@@ -1,9 +1,10 @@
 import './style.css';
+import loadAll from './all.js'
 import githubImg from './images/githublogo.png'
 import igImg from './images/iglogo.png'
 
 
-
+const content = document.querySelector("#content")
 
 const GithubImg = new Image()
 const IgImg = new Image()
@@ -25,11 +26,21 @@ function createHeader(){
                 //line.classList.add('line')
                 reponsiveNav.appendChild(line)
             }
+            let NavBarToClone = createNavBar()
+            const mobileNav = NavBarToClone.cloneNode(true)
+            mobileNav.classList.add('mobile-nav')
+            mobileNav.classList.remove("nav-bar")
+            
+
+            content.appendChild(mobileNav)
 
             reponsiveNav.addEventListener('click',function(){
                 this.classList.toggle('is-active')
+                mobileNav.classList.toggle('is-active')
             })
 
+
+            
 
 
 
@@ -104,20 +115,25 @@ function createNavBar(){
 }
 
 function createMain(){
-    //const main = document.createElement('div')
+    const main = document.createElement('div')
+    main.classList.add("main")
+    main.id="main"
+
+    return main
 
 }
 
-const content = document.querySelector("#content")
+
 
 function InitializeWebsite(){
     content.appendChild(createHeader())
     content.appendChild(createNavBar())
-    //content.appendChild(createMain())
+    content.appendChild(createMain())
     
 }
 
 InitializeWebsite()
+loadAll()
 
 
 console.log('working fine')

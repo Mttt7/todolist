@@ -9,7 +9,7 @@ $font-color:rgb(31, 31, 31);
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 10fr;
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 100px 1fr 1fr;
 }
 
 .header{
@@ -56,9 +56,74 @@ $font-color:rgb(31, 31, 31);
     .responsive-nav.is-active span:nth-child(3){
         transform: translate(-3px,3px) rotate(-45deg);
     }
+}
+
+//mobile NavBar
+.mobile-nav{
+    display: none;
+   
+    
+}
+.mobile-nav.is-active{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    height: 100%;
+    width: 100%;
+
+    background-color: $color3;
+    font-size: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.45rem;
+    padding: 1rem;
+
+    animation: fade 0.2s;
+
+   
+    
+    
+    .nav-element:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+
+    .links{
+        
+        .ig-img{
+            width: 30px;
+        }
+        .ig-img:hover{
+            cursor: pointer;
+            transform: scale(1.03);
+        }
+        .github-img{
+            width: 60px;
+            
+        }
+        .github-img:hover{
+            cursor: pointer;
+            transform: scale(1.03);
+        }
+    }
+
+
+   
 
 }
 
+@keyframes fade {
+    100%{
+        transform: scale(1);
+        //transform:translate(0,100px) ;
+    }
+    0%{
+        transform: scale(0.1);
+    }
+    
+}
 
 
 .nav-bar{
@@ -66,6 +131,7 @@ $font-color:rgb(31, 31, 31);
     font-size: 1.35rem;
 
     grid-column: 1;
+    grid-row: 2/4;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -103,7 +169,7 @@ $font-color:rgb(31, 31, 31);
 }
 
 .main{
-    grid-column: 2/3;
+    grid-column: 2/4;
 }
 
 
