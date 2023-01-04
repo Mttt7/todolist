@@ -28,16 +28,14 @@ function createHeader(){
             }
             let NavBarToClone = createNavBar()
             const mobileNav = NavBarToClone.cloneNode(true)
+            mobileNav.id="mobile-nav"
             mobileNav.classList.add('mobile-nav')
             mobileNav.classList.remove("nav-bar")
             
 
             content.appendChild(mobileNav)
 
-            reponsiveNav.addEventListener('click',function(){
-                this.classList.toggle('is-active')
-                mobileNav.classList.toggle('is-active')
-            })
+            
 
 
             
@@ -118,6 +116,17 @@ function createMain(){
     const main = document.createElement('div')
     main.classList.add("main")
     main.id="main"
+
+
+    const reponsiveNav = document.querySelector(".responsive-nav")
+    const mobileNav =document.querySelector("#mobile-nav")
+    reponsiveNav.addEventListener('click',function(){
+                this.classList.toggle('is-active')
+                mobileNav.classList.toggle('is-active')
+                const main = document.querySelector("#main")
+                main.classList.toggle('shrink')
+            })
+
 
     return main
 

@@ -3,6 +3,9 @@ $color1:rgb(221, 76, 61);
 $color2:rgb(254, 254, 254);
 $color3:rgb(244, 238, 238);
 $font-color:rgb(31, 31, 31);
+body{
+    font-family: 'Poppins', sans-serif;
+}
 
 #content{
     font-family: 'Poppins', sans-serif;
@@ -170,7 +173,230 @@ $font-color:rgb(31, 31, 31);
 
 .main{
     grid-column: 2/4;
+    grid-row: 2/4;
 }
+.main.shrink{
+    grid-row: 3/4;
+    padding-top: 2rem;
+}
+
+//all.js
+.all-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 2rem;
+}
+
+//drawing.js
+.task-el{
+    display: flex;
+    align-items: center;
+    
+    
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 450px;
+    height: 50px;
+    background-color: $color3;
+    border-radius: 20px;
+    padding: 0 0.7rem;
+
+
+    
+    .is-done{
+        height: 25px;
+        width: 25px;
+        margin: 1rem;
+        
+    }
+
+    .task-title{
+
+    }
+
+    .show-btn{
+        margin-left: auto;
+        color: white;
+        background-color: red;
+        padding: 0.4rem;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+
+}
+
+.add-task-el{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 450px;
+    height: 50px;
+    background-color: $color3;
+    border-radius: 20px;
+    padding: 0 0.7rem;   
+
+    .new-btn{
+        background-color: $color1;
+        color: white;
+        background-color: red;
+        padding: 0.4rem;
+        border-radius: 10px;
+        font-weight: 600;
+        //margin-left: auto;
+    }
+}
+
+.btn{
+    cursor: pointer;
+}
+.btn:hover{
+    transform: scale(1.05);
+}
+
+//modal
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.3rem;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    height: 50%;
+    border-radius: 20px;
+
+    background-color: gray;
+    
+
+    .text-form{
+        padding: 9px;
+        font-size: 22px;
+        border-width: 0px;
+        border-color: #ed0000;
+        background-color: #ffffff;
+        color: #000000;
+        border-style: solid;
+        border-radius: 30px;
+        box-shadow: 0px 0px 8px rgba(66,66,66,.2);
+        text-shadow: 0px 0px 0px rgba(66,66,66,.75);
+
+        margin-top: 1rem;
+    }
+    .description-form{
+        
+        height: 100px;
+        resize: none;
+    }
+    .title-form{
+       font-size: 1.4rem;
+    }
+
+    .date-form{
+        padding: 9px;
+        font-size: 22px;
+        border-width: 0px;
+        border-color: #ed0000;
+        background-color: #ffffff;
+        color: #000000;
+        border-style: solid;
+        border-radius: 30px;
+        box-shadow: 0px 0px 8px rgba(66,66,66,.2);
+        text-shadow: 0px 0px 0px rgba(66,66,66,.75);
+
+        margin-top: 1rem;
+    }
+
+    .important-form{
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+
+        width: 210px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 1.7rem;
+
+
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .not-important{
+        color: #ed0000;
+        
+    }
+    .important{
+        color: #02f32e;
+
+    }
+    
+
+    
+
+
+
+    .close-modal{
+        display: inline-block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        
+    }
+    .line {
+        
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        background-color: white;
+        
+        transition: transform 0.2s ease;
+        
+      }
+      
+      .line:first-child {
+        transform: rotate(45deg);
+      }
+      
+      .line:last-child {
+        transform: rotate(-45deg);
+      }
+
+
+
+    .submit-btn{
+        color: $color2;
+        font-weight: 600;
+        background-color: $color1;
+        padding: 0.5rem 5rem;
+        border-radius: 20px;
+        margin-top: auto;
+        margin-bottom: 1rem;
+    }
+
+}
+
+.add-modal{
+
+}
+
+
 
 
 //MEDIA QUERIES//
@@ -186,6 +412,19 @@ $font-color:rgb(31, 31, 31);
     .nav-bar{
         display: none;
     }
+
+    .task-el{
+        width: 300px;
+    }
+    .add-task-el{
+        width: 300px;
+    }
+    
+    
+    .main{
+        grid-column: 1/4;
+    }
+   
 }
 
 

@@ -1,6 +1,5 @@
 
-
-class Project{
+export class Project{
     static projects = []
     constructor(title,description,tasks){
         this._title = title
@@ -20,9 +19,8 @@ class Project{
     
 }
 
-
 //One task can only belong to one project
-class Task{
+export class Task{
     static tasks = []
 
     constructor(title,description,date,important,project){
@@ -53,7 +51,7 @@ class Task{
 }
 
 //???
-function addToProject(taskTitle,projectTitle){
+export function addToProject(taskTitle,projectTitle){
     const task = Task.tasks.find(t => t._title===taskTitle)
     task._project = projectTitle
     const project = Project.projects.find(p => p._title===projectTitle)
@@ -62,7 +60,7 @@ function addToProject(taskTitle,projectTitle){
 
 }
 
-function deleteFromProject(taskTitle,projectTitle){
+export function deleteFromProject(taskTitle,projectTitle){
     const task = Task.tasks.find(t => t._title===taskTitle)
     task._project=''
     const project = Project.projects.find(p => p._title===projectTitle)
@@ -70,22 +68,3 @@ function deleteFromProject(taskTitle,projectTitle){
     console.log("deleted ",taskTitle,"from ",projectTitle)
 }
 
-let task1 = new Task('task1','op','22-01',true,'')
-let task2 = new Task('task2','op2','21-01',false,'')
-let task3 = new Task('task3','op3','30-01',true,'')
-//console.log(Task.tasks)
-
-let projekt1 = new Project('proj1','opis',[])
-
-//console.log(task1)
-addToProject('task1','proj1')
-addToProject('task2','proj1')
-addToProject('task3','proj1')
-
-
-console.log(projekt1)
-
-console.log("------")
-deleteFromProject('task1','proj1')
-deleteFromProject('task3','proj1')
-console.log(projekt1)
