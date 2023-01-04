@@ -1,4 +1,5 @@
 import {addModal, showModal} from './modals.js'
+import {Task} from './data.js'
 
 
 export default function drawTask(task){
@@ -26,6 +27,8 @@ export default function drawTask(task){
         showBtn.textContent = 'SHOW'
         taskEl.appendChild(showBtn)
 
+        showBtn.addEventListener('click',drawShowModal)
+
 
 
     return taskEl
@@ -47,7 +50,16 @@ export function drawAddTaskEl(){
 
 function drawAddModal(){
     const main = document.querySelector("#main")
-    console.log("xxxx")
     main.appendChild(addModal())
     
+}
+
+function drawShowModal(e){
+    const main = document.querySelector("#main")
+    let taskTitle = e.target.parentElement.children[1].textContent
+    let task = Task.tasks.find(t => t._title==taskTitle)
+    console.log(task)
+    main.appendChild(showModal(task))
+
+
 }
