@@ -52,20 +52,21 @@ export class Task{
 }
 
 //???
-export function addToProject(taskTitle,projectTitle){
-    const task = Task.tasks.find(t => t._title===taskTitle)
-    task._project = projectTitle
-    const project = Project.projects.find(p => p._title===projectTitle)
-    project._tasks.push(taskTitle)
-    console.log("added ",taskTitle,"to ",projectTitle)
+export function addToProject(task,projectTit){
+
+    task.project = projectTit
+    const project = Project.projects.find(item => item.title == projectTit);
+    
+    project.tasks.push(task.title)
+
+    console.log("added ",task.title,"to ",project.title)
 
 }
 
-export function deleteFromProject(taskTitle,projectTitle){
-    const task = Task.tasks.find(t => t._title===taskTitle)
+export function deleteFromProject(task,project){
+    let toDel = task._project
     task._project=''
-    const project = Project.projects.find(p => p._title===projectTitle)
-    project._tasks = project._tasks.filter(t =>t!==taskTitle)
-    console.log("deleted ",taskTitle,"from ",projectTitle)
+    project._tasks = project._tasks.filter(t =>t!==task.title)
+    console.log("deleted ",toDel,"from ",project.title)
 }
 

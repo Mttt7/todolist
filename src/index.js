@@ -55,31 +55,37 @@ function createNavBar(){
 
         const navAll = document.createElement('div')
         navAll.classList.add('nav-element')
+        navAll.dataset.isactive=false
         navBar.appendChild(navAll)
             navAll.textContent='All'
 
         const navToday = document.createElement('div')
         navToday.classList.add('nav-element')
+        navToday.dataset.isactive=false
         navBar.appendChild(navToday)
             navToday.textContent='Today'    
 
         const navThisWeek = document.createElement('div')
         navThisWeek.classList.add('nav-element')
+        navThisWeek.dataset.isactive=false
         navBar.appendChild(navThisWeek)
             navThisWeek.textContent='This week'
             
         const navOverdue = document.createElement('div')
         navOverdue.classList.add('nav-element')
+        navOverdue.dataset.isactive=false
         navBar.appendChild(navOverdue)
         navOverdue.textContent='Overdue'
 
         const navProjects = document.createElement('div')
         navProjects.classList.add('nav-element')
+        navProjects.dataset.isactive=false
         navBar.appendChild(navProjects)
         navProjects.textContent='Projects'
 
         const navTrash = document.createElement('div')
         navTrash.classList.add('nav-element')
+        navTrash.dataset.isactive=false
         navBar.appendChild(navTrash)
         navTrash.textContent='Trash'
 

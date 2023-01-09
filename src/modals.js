@@ -1,4 +1,6 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
+import loadAll from './all.js'
+
 
 function X(modal){
     const closeModal = document.createElement('div')
@@ -17,6 +19,18 @@ function X(modal){
             main.removeChild(modal)
         })  
     return closeModal
+}
+
+
+function currentWindow(){
+    
+    const navBar = document.querySelector(".nav-bar")
+    var arr = Array.prototype.slice.call( navBar.children )
+    
+    let res  = arr.find(item => item.dataset.isactive == 'true').innerText;
+    
+
+    return res
 }
 
 export function addModal(){
@@ -80,9 +94,11 @@ export function addModal(){
 
             if(importantForm.classList.contains('important')){
                 importantForm.textContent = 'important'
+                importantForm.dataset.important=true
             }
             else if(importantForm.classList.contains('not-important')){
                 importantForm.textContent = 'not important'
+                importantForm.dataset.important=false
             }
 
 
@@ -97,6 +113,29 @@ export function addModal(){
         submitBtn.classList.add('submit-btn')
 
         submitBtn.addEventListener('click',()=>{
+            let title = titleForm.value
+            let description = descriptionForm.value
+            let project = projectSelect.options[projectSelect.selectedIndex].text
+            let important = importantForm.dataset.important
+            let date = dateForm.value
+
+            if(project=='none'){
+                project=''
+            }
+            if(title==''){
+                title='unnamed'
+            }
+            const task = new Task(title,description,date,important,project)
+            if(project!=''){
+                addToProject(task,project)
+            }
+
+            
+            if(currentWindow()=='All') loadAll()
+
+
+
+            console.log(task)
 
         })
 
