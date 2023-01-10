@@ -12,7 +12,7 @@ export default function drawTask(task){
 
         const taskName = document.createElement('div')
         taskName.classList.add('task-title')
-        console.log(task.name)
+        
         taskName.textContent = task.title
         taskEl.appendChild(taskName)
 

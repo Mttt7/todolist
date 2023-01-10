@@ -3,6 +3,12 @@ import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import  drawTask  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
 
+
+const p1 = new Project('projekt1','opis projektu',[])
+const p2 = new Project('projekt2','opis projektu',[])
+const p3 = new Project('projekt3','opis projektu',[])
+
+
 function drawAll(){
     const container = document.createElement('div')
     container.classList.add('all-container')

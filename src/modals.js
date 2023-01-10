@@ -62,13 +62,13 @@ export function addModal(){
             projectForm.appendChild(projectSelect)
 
             const opt = document.createElement('option')
-            opt.value=-1
+            opt.value=0
             opt.text='none'
             projectSelect.appendChild(opt)
 
             for(let i=0;i<Project.projects.length;i++){
                 const opt = document.createElement('option')
-                opt.value=i
+                opt.value=i+1
                 opt.text=Project.projects[i].title
                 projectSelect.appendChild(opt)
             }
@@ -159,6 +159,31 @@ export function showModal(task){
         
         const descriptionForm = modal.querySelector('.description-form')
         descriptionForm.value = task.description
+
+        const projectSelect = modal.querySelector('.project-select')
+
+        let index=-1
+        
+        if(task.project!=''){
+            console.log('PROJECT EXIST')
+            for(let i = 0;i<=Project.projects.length;i++){
+
+                if(task.project==projectSelect.options[i].innerText){
+                    
+                    index = (projectSelect.options[i].value) 
+                   
+                }
+
+            }
+        }
+        console
+
+        projectSelect.selectedIndex = index 
+        
+
+
+
+        //projectSelect.selectedIndex = projectSelect.options[projectSelect.selectedIndex]
 
         //const dateForm = modal.querySelector('.date-form')
         
