@@ -162,7 +162,7 @@ export function showModal(task){
 
         const projectSelect = modal.querySelector('.project-select')
 
-        let index=-1
+        let index=0
         
         if(task.project!=''){
             console.log('PROJECT EXIST')
@@ -176,17 +176,79 @@ export function showModal(task){
 
             }
         }
-        console
+        projectSelect.selectedIndex = index
+        
+        const dateForm = modal.querySelector('.date-form')
+        dateForm.value = task.date
+        
+        const importantForm = modal.querySelector('.important-form')
+        console.log(task.important)
+        const imp = task.important
+        
+        if(imp=='true'){
+            console.log('TRUEEEEE')
+            importantForm.dataset.important='true'
+            importantForm.classList.add('important')
+            importantForm.textContent = 'important'
+            importantForm.classList.remove('not-important')
+        }
 
-        projectSelect.selectedIndex = index 
+        // if(task.important==true){
+        //     console.log("IMPORTANT")
+        //     importantForm.dataset.important = true
+        //     importantForm.textContent = 'important'
+        //     importantForm.classList.remove('not-important')
+        //     importantForm.classList.add('important')
+        // }else{
+        //     console.log("NOT IMPORTANT")
+        //     importantForm.dataset.important = false
+        //     importantForm.textContent = 'not important'
+        //     importantForm.classList.add('not-important')
+        //     importantForm.classList.remove('important')
+        // }
         
 
 
 
-        //projectSelect.selectedIndex = projectSelect.options[projectSelect.selectedIndex]
+        const submitBtn = modal.querySelector('.submit-btn')
+        //*cloning nodes to remove all event listeners from submit btn
+        const editSubmitBtn = submitBtn.cloneNode(true)
+        submitBtn.parentNode.replaceChild(editSubmitBtn,submitBtn)
 
-        //const dateForm = modal.querySelector('.date-form')
-        
+        editSubmitBtn.addEventListener('click',()=>{
+            let title = titleForm.value
+            let description = descriptionForm.value
+            let project = projectSelect.options[projectSelect.selectedIndex].text
+            let important = importantForm.dataset.important
+            let date = dateForm.value
+
+            if(project=='none'){
+                project=''
+            }
+            if(title==''){
+                title='unnamed'
+            }
+            
+            if(project!=''){
+                addToProject(task,project)
+            }
+
+            task.title = title
+            task.description=description
+            task.project=project
+            task.important = important
+            task.date=date
+
+            
+            if(currentWindow()=='All') loadAll()
+
+
+
+            console.log(task)
+
+        })
+
+
 
     modal.appendChild(X(modal))
 

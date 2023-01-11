@@ -42,7 +42,7 @@ export class Task{
 
     set title(title){this._title=title}
     set description(description){ this._description=description}
-    set date(date){this_date = date}
+    set date(date){this._date = date}
     set important(important){this._important = important}
     set project(project){ this._project=project}
 
