@@ -152,6 +152,22 @@ export function addModal(){
 
 export function showModal(task){
     const modal = addModal()
+        const deleteBtn = document.createElement('div')
+        deleteBtn.classList.add('delete-btn')
+        deleteBtn.classList.add('btn')
+        deleteBtn.textContent = 'DELETE'
+        modal.appendChild(deleteBtn)
+
+        deleteBtn.addEventListener('click',()=>{
+            console.log('#task title:',task.title)
+            console.log('#tasks:',Task.tasks)
+            
+            Task.tasks = Task.tasks.filter((t)=>t.title!=task.title)
+            refresh()
+        })
+
+
+
     modal.classList.remove('add-modal')
     modal.classList.add('edit-modal')
         const titleForm = modal.querySelector('.title-form')
@@ -193,21 +209,7 @@ export function showModal(task){
             importantForm.classList.remove('not-important')
         }
 
-        // if(task.important==true){
-        //     console.log("IMPORTANT")
-        //     importantForm.dataset.important = true
-        //     importantForm.textContent = 'important'
-        //     importantForm.classList.remove('not-important')
-        //     importantForm.classList.add('important')
-        // }else{
-        //     console.log("NOT IMPORTANT")
-        //     importantForm.dataset.important = false
-        //     importantForm.textContent = 'not important'
-        //     importantForm.classList.add('not-important')
-        //     importantForm.classList.remove('important')
-        // }
         
-
 
 
         const submitBtn = modal.querySelector('.submit-btn')
@@ -240,7 +242,7 @@ export function showModal(task){
             task.date=date
 
             
-            if(currentWindow()=='All') loadAll()
+            refresh()
 
 
 
@@ -253,6 +255,10 @@ export function showModal(task){
     modal.appendChild(X(modal))
 
 
+
+    function refresh(){
+        if(currentWindow()=='All') loadAll()
+    }
 
     return modal
 }

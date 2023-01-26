@@ -314,7 +314,7 @@ body {
 .modal .line:last-child {
   transform: rotate(-45deg);
 }
-.modal .submit-btn {
+.modal .btn {
   color: rgb(254, 254, 254);
   font-weight: 600;
   background-color: rgb(221, 76, 61);
@@ -322,6 +322,10 @@ body {
   border-radius: 20px;
   margin-top: auto;
   margin-bottom: 1rem;
+}
+.modal .delete-btn {
+  margin-top: 0rem;
+  margin-bottom: 0.3rem;
 }
 
 @media only screen and (min-width: 701px) {
