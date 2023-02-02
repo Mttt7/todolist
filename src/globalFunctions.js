@@ -1,6 +1,7 @@
 import loadAll from "./all";
 import loadCompleted from "./completed";
 import loadTrash from "./trash";
+import loadToday from "./today";
 
 function currentWindow(){
     
@@ -19,4 +20,5 @@ export function refresh(){
     if(currentWindow()=='All') loadAll()
     if(currentWindow()=='Trash') loadTrash()
     if(currentWindow()=='Completed') loadCompleted()
+    if(currentWindow()=='Today') loadCToday()
 }

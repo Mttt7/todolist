@@ -28,7 +28,7 @@ export class Task{
     constructor(title,description,date,important,project){
         this._title = title
         this._description = description
-        this._date = date
+        this._date = new Date(date)
         this._important = important
         this._project = project
         this._isDone = false
@@ -45,7 +45,7 @@ export class Task{
 
     set title(title){this._title=title}
     set description(description){ this._description=description}
-    set date(date){this._date = date}
+    set date(date){this._date = new Date(date)}
     set important(important){this._important = important}
     set project(project){ this._project=project}
     set isDone(isDone){this._isDone=isDone}

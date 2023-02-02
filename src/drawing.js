@@ -4,7 +4,9 @@ import loadTrash from './trash.js';
 import loadCompleted from './completed.js';
 import { is } from 'date-fns/locale';
 import { refresh } from './globalFunctions.js';
-
+import { format } from 'date-fns'
+import { formatDistance } from 'date-fns'
+import { differenceInHours } from 'date-fns'
 
 export default function drawTask(task){
     const taskEl = document.createElement('div')
@@ -40,8 +42,16 @@ export default function drawTask(task){
         taskEl.appendChild(taskName)
 
         const taskDate = document.createElement('div')
-        taskDate.classList.add('task-date')
-        taskDate.textContent = task.date
+        taskDate.classList.add('task-date') 
+        if(isNaN(task.date)) taskDate.textContent='no deadline'
+        else{
+            if(differenceInHours(task.date,new Date())>72){
+                
+                taskDate.textContent = format(task.date,'do-LLL-yyyy')
+            }
+            else taskDate.textContent = formatDistance(new Date(),task.date) + ' left'
+        }
+        
         taskEl.appendChild(taskDate)
 
         const showBtn = document.createElement('div')

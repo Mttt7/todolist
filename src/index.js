@@ -4,6 +4,7 @@ import loadTrash from './trash.js'
 import loadCompleted from './completed.js'
 import githubImg from './images/githublogo.png'
 import igImg from './images/iglogo.png'
+import loadToday from './today';
 
 
 const content = document.querySelector("#content")
@@ -135,8 +136,11 @@ function createNavBar(){
                 })
 
                 navCompleted.addEventListener('click',()=>{
-                    console.log("lll")
                     loadCompleted()
+                })
+
+                navToday.addEventListener('click',()=>{
+                    loadToday()
                 })
 
         
