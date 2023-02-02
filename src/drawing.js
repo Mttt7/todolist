@@ -1,6 +1,19 @@
 import {addModal, showModal} from './modals.js'
 import {Task} from './data.js'
+import loadTrash from './trash.js';
+import loadCompleted from './completed.js';
+import { is } from 'date-fns/locale';
 
+function currentWindow(){
+    
+    const navBar = document.querySelector(".nav-bar")
+    var arr = Array.prototype.slice.call( navBar.children )
+    
+    let res  = arr.find(item => item.dataset.isactive == 'true').innerText;
+    
+
+    return res
+}
 
 export default function drawTask(task){
     const taskEl = document.createElement('div')
@@ -8,7 +21,26 @@ export default function drawTask(task){
         const isDone = document.createElement('input')
         isDone.type = 'checkbox'
         isDone.classList.add('is-done')
+        if(task.isDone==true) isDone.checked=true
         taskEl.appendChild(isDone)
+
+        isDone.addEventListener('click',()=>{
+            console.log("-------")
+            console.log(task) 
+            if(task.isDone==false){
+                console.log("task.isDone==false")
+                task.isDone = true
+            }
+            else if(task.isDone==true){
+                console.log("task.isDone==true")
+                task.isDone = false
+            }
+            refresh()
+
+           console.log(task) 
+           console.log("-------")
+        })
+
 
         const taskName = document.createElement('div')
         taskName.classList.add('task-title')
@@ -33,6 +65,42 @@ export default function drawTask(task){
 
     return taskEl
 }
+
+export function drawTaskInTrash(task){
+    const taskEl = drawTask(task)
+
+    taskEl.removeChild(taskEl.querySelector('.show-btn'))
+    
+    const recoverBtn = document.createElement('div')
+        recoverBtn.classList.add('recover-btn')
+        recoverBtn.classList.add('btn')
+        recoverBtn.innerText='Recover'
+        taskEl.appendChild(recoverBtn)
+
+        recoverBtn.addEventListener('click',()=>{
+            
+            Task.trash = Task.trash.filter(t=>t.title!=task.title)
+            
+            
+            Task.tasks.push(task)
+           
+            refresh()
+            
+        })
+
+
+    
+    return taskEl
+}
+
+function refresh(){
+    //if(currentWindow()=='All') loadAll()
+    if(currentWindow()=='Trash') loadTrash()
+    if(currentWindow()=='Completed') loadCompleted()
+}
+
+
+
 
 export function drawAddTaskEl(){
     const taskEl = document.createElement('div')

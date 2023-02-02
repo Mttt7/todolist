@@ -1,5 +1,6 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import loadAll from './all.js'
+import loadCompleted from './completed.js'
 
 
 function X(modal){
@@ -123,7 +124,8 @@ export function addModal(){
                 project=''
             }
             if(title==''){
-                title='unnamed'
+                console.log('unnamed')
+                title='unnamed'+' '+checkUnnamed()
             }
             const task = new Task(title,description,date,important,project)
             if(project!=''){
@@ -161,7 +163,7 @@ export function showModal(task){
         deleteBtn.addEventListener('click',()=>{
             console.log('#task title:',task.title)
             console.log('#tasks:',Task.tasks)
-            
+            Task.trash.push(task)
             Task.tasks = Task.tasks.filter((t)=>t.title!=task.title)
             refresh()
         })
@@ -228,7 +230,8 @@ export function showModal(task){
                 project=''
             }
             if(title==''){
-                title='unnamed'
+                console.log('unnamed')
+                title='unnamed'+' '+checkUnnamed()
             }
             
             if(project!=''){
@@ -256,9 +259,35 @@ export function showModal(task){
 
 
 
-    function refresh(){
-        if(currentWindow()=='All') loadAll()
-    }
+    
 
     return modal
+}
+
+function refresh(){
+    if(currentWindow()=='All') loadAll()
+    if(currentWindow()=='Completed') loadCompleted()
+}
+
+
+
+// NOT WORKING (ADD TRASH FEATURE ! ! ! )
+function checkUnnamed(){
+    let unn=0
+    console.log(Task.tasks)
+    for(let i = 0;i<Task.tasks.length;i++){
+        console.log(Task.tasks[i].title)
+        console.log('unn:',unn)
+        if(Task.tasks[i].title.slice(0,7)=='unnamed'){
+            
+            unn++
+        }
+    }
+    for(let i = 0; i<Task.trash.length;i++){
+        if(Task.trash[i].title.slice(0,7)=='unnamed'){
+            unn++
+        }
+    }
+    return unn
+    
 }

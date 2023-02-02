@@ -2,7 +2,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import  drawTask  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
-
+import { refresh } from './globalFunctions.js'
 
 const p1 = new Project('projekt1','opis projektu',[])
 const p2 = new Project('projekt2','opis projektu',[])
@@ -11,16 +11,20 @@ const p3 = new Project('projekt3','opis projektu',[])
 
 function drawAll(){
     const container = document.createElement('div')
-    container.classList.add('all-container')
+    container.classList.add('container')
 
     
     
     
     container.append(drawAddTaskEl())
     for(let i=0;i<Task.tasks.length;i++){
-        const taskEl = drawTask(Task.tasks[i])
+        if(Task.tasks[i].isDone==false){
+            const taskEl = drawTask(Task.tasks[i])
         
-        container.append(taskEl)
+            container.append(taskEl)
+        }
+        refresh()
+        
 
     }
 

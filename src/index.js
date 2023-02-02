@@ -1,5 +1,7 @@
 import './style.css';
 import loadAll from './all.js'
+import loadTrash from './trash.js'
+import loadCompleted from './completed.js'
 import githubImg from './images/githublogo.png'
 import igImg from './images/iglogo.png'
 
@@ -83,11 +85,20 @@ function createNavBar(){
         navBar.appendChild(navProjects)
         navProjects.textContent='Projects'
 
+        const navCompleted = document.createElement('div')
+        navCompleted.classList.add('nav-element')
+        navCompleted.dataset.isactive=false
+        navBar.appendChild(navCompleted)
+        navCompleted.textContent='Completed'
+
+
         const navTrash = document.createElement('div')
         navTrash.classList.add('nav-element')
         navTrash.dataset.isactive=false
         navBar.appendChild(navTrash)
         navTrash.textContent='Trash'
+
+        
 
 
         const footer = document.createElement('div')
@@ -111,6 +122,23 @@ function createNavBar(){
 
 
         
+
+                //action listeners
+
+                navAll.addEventListener('click',()=>{
+                    loadAll()
+                })
+
+
+                navTrash.addEventListener('click',()=>{
+                    loadTrash()
+                })
+
+                navCompleted.addEventListener('click',()=>{
+                    console.log("lll")
+                    loadCompleted()
+                })
+
         
 
 

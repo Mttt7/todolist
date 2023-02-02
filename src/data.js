@@ -23,6 +23,7 @@ export class Project{
 //One task can only belong to one project
 export class Task{
     static tasks = []
+    static trash = []
 
     constructor(title,description,date,important,project){
         this._title = title
@@ -30,6 +31,7 @@ export class Task{
         this._date = date
         this._important = important
         this._project = project
+        this._isDone = false
 
         Task.tasks.push(this)
     }
@@ -39,13 +41,14 @@ export class Task{
     get date(){ return this._date}
     get important(){ return this._important}
     get project(){ return this._project}
+    get isDone(){return this._isDone}
 
     set title(title){this._title=title}
     set description(description){ this._description=description}
     set date(date){this._date = date}
     set important(important){this._important = important}
     set project(project){ this._project=project}
-
+    set isDone(isDone){this._isDone=isDone}
 
     
 
