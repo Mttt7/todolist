@@ -5,6 +5,8 @@ import loadCompleted from './completed.js'
 import githubImg from './images/githublogo.png'
 import igImg from './images/iglogo.png'
 import loadToday from './today';
+import loadThisWeek from './thisWeek';
+import loadOverdue from './overdue';
 
 
 const content = document.querySelector("#content")
@@ -141,6 +143,14 @@ function createNavBar(){
 
                 navToday.addEventListener('click',()=>{
                     loadToday()
+                })
+
+                navThisWeek.addEventListener('click',()=>{
+                    loadThisWeek()
+                })
+
+                navOverdue.addEventListener('click',()=>{
+                    loadOverdue()
                 })
 
         

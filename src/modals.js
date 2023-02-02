@@ -1,6 +1,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import loadAll from './all.js'
 import loadCompleted from './completed.js'
+import { refresh } from './globalFunctions.js'
 
 
 function X(modal){
@@ -23,16 +24,7 @@ function X(modal){
 }
 
 
-function currentWindow(){
-    
-    const navBar = document.querySelector(".nav-bar")
-    var arr = Array.prototype.slice.call( navBar.children )
-    
-    let res  = arr.find(item => item.dataset.isactive == 'true').innerText;
-    
 
-    return res
-}
 
 export function addModal(){
     const modal = document.createElement('div')
@@ -133,7 +125,7 @@ export function addModal(){
             }
 
             
-            if(currentWindow()=='All') loadAll()
+            refresh()
 
 
 
@@ -197,7 +189,7 @@ export function showModal(task){
         projectSelect.selectedIndex = index
         
         const dateForm = modal.querySelector('.date-form')
-        dateForm.value = task.date
+        dateForm.value = task.date.toString() //_____________________________zle__!!!
         
         const importantForm = modal.querySelector('.important-form')
         console.log(task.important)
@@ -264,10 +256,7 @@ export function showModal(task){
     return modal
 }
 
-function refresh(){
-    if(currentWindow()=='All') loadAll()
-    if(currentWindow()=='Completed') loadCompleted()
-}
+
 
 
 

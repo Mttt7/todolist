@@ -2,6 +2,7 @@ import loadAll from "./all";
 import loadCompleted from "./completed";
 import loadTrash from "./trash";
 import loadToday from "./today";
+import loadThisWeek from "./thisWeek";
 
 function currentWindow(){
     
@@ -20,5 +21,6 @@ export function refresh(){
     if(currentWindow()=='All') loadAll()
     if(currentWindow()=='Trash') loadTrash()
     if(currentWindow()=='Completed') loadCompleted()
-    if(currentWindow()=='Today') loadCToday()
+    if(currentWindow()=='Today') loadToday()
+    if(currentWindow()=='This week') loadThisWeek()
 }
