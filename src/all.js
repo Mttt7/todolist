@@ -23,7 +23,7 @@ function drawAll(){
         
             container.append(taskEl)
         }
-        refresh()
+        //refresh()
         
 
     }

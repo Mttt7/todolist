@@ -3,17 +3,8 @@ import {Task} from './data.js'
 import loadTrash from './trash.js';
 import loadCompleted from './completed.js';
 import { is } from 'date-fns/locale';
+import { refresh } from './globalFunctions.js';
 
-function currentWindow(){
-    
-    const navBar = document.querySelector(".nav-bar")
-    var arr = Array.prototype.slice.call( navBar.children )
-    
-    let res  = arr.find(item => item.dataset.isactive == 'true').innerText;
-    
-
-    return res
-}
 
 export default function drawTask(task){
     const taskEl = document.createElement('div')
@@ -93,11 +84,7 @@ export function drawTaskInTrash(task){
     return taskEl
 }
 
-function refresh(){
-    //if(currentWindow()=='All') loadAll()
-    if(currentWindow()=='Trash') loadTrash()
-    if(currentWindow()=='Completed') loadCompleted()
-}
+
 
 
 
