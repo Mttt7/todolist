@@ -2,7 +2,7 @@ import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import loadAll from './all.js'
 import loadCompleted from './completed.js'
 import { refresh } from './globalFunctions.js'
-
+import { isValid } from 'date-fns'
 
 function X(modal){
     const closeModal = document.createElement('div')
@@ -188,15 +188,19 @@ export function showModal(task){
         }
         projectSelect.selectedIndex = index
         
-        const dateForm = modal.querySelector('.date-form')
-        dateForm.value = task.date.toString() //_____________________________zle__!!!
+        if(isValid(task.date)==true){
+            const dateForm = modal.querySelector('.date-form')
+            dateForm.value = task.date.toISOString().substring(0,10)
+        }
+        
+       
         
         const importantForm = modal.querySelector('.important-form')
         console.log(task.important)
         const imp = task.important
         
         if(imp=='true'){
-            console.log('TRUEEEEE')
+            
             importantForm.dataset.important='true'
             importantForm.classList.add('important')
             importantForm.textContent = 'important'
@@ -222,7 +226,7 @@ export function showModal(task){
                 project=''
             }
             if(title==''){
-                console.log('unnamed')
+                
                 title='unnamed'+' '+checkUnnamed()
             }
             
