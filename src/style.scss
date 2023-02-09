@@ -180,7 +180,7 @@ body{
     padding-top: 2rem;
 }
 
-//all.js
+
 .container{
     display: flex;
     flex-direction: column;
@@ -229,6 +229,41 @@ body{
     
 
 
+}
+
+//projects
+.projects-container{
+    gap:1rem;
+}
+.project-el{
+    
+    background: rgb(99,168,58);
+    background: linear-gradient(107deg, rgba(99,168,58,1) 2%, rgba(47,224,202,1) 100%);
+    padding: 2rem;
+    border-radius: 20px;
+
+    .project-bar{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+
+        .project-title{
+            font-size: 2rem;
+        }
+
+        .more-btn{
+        margin-left: auto;
+        color: white;
+        background-color: rgb(178, 0, 248);
+        
+        padding: 0.4rem;
+        border-radius: 10px;
+        font-weight: 600;
+        }
+        
+    }
+    
 }
 
 .add-task-el{

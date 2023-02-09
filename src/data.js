@@ -7,6 +7,7 @@ export class Project{
         this._description = description
         this._tasks = tasks
         Project.projects.push(this)
+        
     }
 
     get title(){return this._title}

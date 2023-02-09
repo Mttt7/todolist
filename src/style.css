@@ -176,6 +176,33 @@ body {
   font-weight: 600;
 }
 
+.projects-container {
+  gap: 1rem;
+}
+
+.project-el {
+  background: rgb(99, 168, 58);
+  background: linear-gradient(107deg, rgb(99, 168, 58) 2%, rgb(47, 224, 202) 100%);
+  padding: 2rem;
+  border-radius: 20px;
+}
+.project-el .project-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.project-el .project-bar .project-title {
+  font-size: 2rem;
+}
+.project-el .project-bar .more-btn {
+  margin-left: auto;
+  color: white;
+  background-color: rgb(178, 0, 248);
+  padding: 0.4rem;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
 .add-task-el {
   display: flex;
   align-items: center;

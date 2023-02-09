@@ -260,7 +260,9 @@ export function showModal(task){
     return modal
 }
 
-
+export function projectModal(project){
+    
+}
 
 
 

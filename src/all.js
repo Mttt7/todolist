@@ -4,10 +4,13 @@ import  drawTask  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
 import { refresh } from './globalFunctions.js'
 
+
 const p1 = new Project('projekt1','opis projektu',[])
 const p2 = new Project('projekt2','opis projektu',[])
 const p3 = new Project('projekt3','opis projektu',[])
-
+const t1 = new Task('title','description','11-11-2023',true,'projekt1')
+addToProject(t1,'projekt1')
+            
 
 function drawAll(){
     const container = document.createElement('div')

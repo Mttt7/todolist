@@ -7,6 +7,7 @@ import igImg from './images/iglogo.png'
 import loadToday from './today';
 import loadThisWeek from './thisWeek';
 import loadOverdue from './overdue';
+import loadProjects from './projects';
 
 
 const content = document.querySelector("#content")
@@ -153,6 +154,10 @@ function createNavBar(){
                     loadOverdue()
                 })
 
+                navProjects.addEventListener('click',()=>{
+                    loadProjects()
+                })
+
         
 
 
@@ -190,7 +195,7 @@ function InitializeWebsite(){
 }
 
 InitializeWebsite()
-loadAll()
+loadProjects()
 
 
 console.log('working fine')

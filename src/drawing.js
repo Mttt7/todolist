@@ -105,7 +105,59 @@ export function drawTaskInTrash(task){
     return taskEl
 }
 
+function drawNoProjectInfo(){
+    const el = document.createElement('div')
+    el.innerText='No tasks!'
+    el.classList.add('add-task-el')
+    
 
+
+    return el
+}
+
+
+export function drawProject(project){
+
+    console.log(project._tasks)
+
+
+    const projectEl = document.createElement('div')
+    projectEl.classList.add('project-el')
+        //project title:
+            const projectBar = document.createElement('div')
+            projectBar.classList.add('project-bar')
+            projectEl.appendChild(projectBar)
+
+                const projectTitle = document.createElement('div')
+                projectTitle.classList.add('project-title')
+                projectTitle.innerText=project.title
+                projectBar.appendChild(projectTitle)
+
+                const moreBtn = document.createElement('div')
+                moreBtn.classList.add('more-btn')
+                moreBtn.classList.add('btn')
+                moreBtn.innerText='More'
+                projectBar.appendChild(moreBtn)
+
+
+
+
+    //adding tasks to project:
+        for(let i = 0;i<project.tasks.length;i++){
+            const t = Task.tasks.find(e => e.title==project.tasks[i])
+            const taskEl = drawTask(t)
+            projectEl.appendChild(taskEl)
+        }
+        if(project.tasks.length==0){
+            
+            projectEl.appendChild(drawNoProjectInfo())
+        }
+
+
+
+
+    return projectEl
+}
 
 
 
