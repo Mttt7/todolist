@@ -188,8 +188,9 @@ export function showModal(task){
         }
         projectSelect.selectedIndex = index
         
+        const dateForm = modal.querySelector('.date-form')
         if(isValid(task.date)==true){
-            const dateForm = modal.querySelector('.date-form')
+            dateForm = modal.querySelector('.date-form')
             dateForm.value = task.date.toISOString().substring(0,10)
         }
         
@@ -216,6 +217,7 @@ export function showModal(task){
         submitBtn.parentNode.replaceChild(editSubmitBtn,submitBtn)
 
         editSubmitBtn.addEventListener('click',()=>{
+
             let title = titleForm.value
             let description = descriptionForm.value
             let project = projectSelect.options[projectSelect.selectedIndex].text

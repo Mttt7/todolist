@@ -13,6 +13,9 @@ import { isPast } from 'date-fns'
 export default function drawTask(task){
     const taskEl = document.createElement('div')
     taskEl.classList.add('task-el')
+    if(task.important==true){
+        taskEl.classList.add('task-el-important')
+    }
         const isDone = document.createElement('input')
         isDone.type = 'checkbox'
         isDone.classList.add('is-done')
@@ -123,6 +126,7 @@ export function drawProject(project){
 
     const projectEl = document.createElement('div')
     projectEl.classList.add('project-el')
+     
         //project title:
             const projectBar = document.createElement('div')
             projectBar.classList.add('project-bar')

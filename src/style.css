@@ -176,6 +176,10 @@ body {
   font-weight: 600;
 }
 
+.task-el-important {
+  background-color: #02f32e;
+}
+
 .projects-container {
   gap: 1rem;
 }
