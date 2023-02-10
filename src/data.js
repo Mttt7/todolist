@@ -63,7 +63,7 @@ export function addToProject(task,projectTit){
     
     project.tasks.push(task.title)
 
-    console.log("added ",task.title,"to ",project.title)
+    //console.log("added ",task.title,"to ",project.title)
 
 }
 

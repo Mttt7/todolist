@@ -1,6 +1,6 @@
 
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
-import  drawTask, { drawProject }  from './drawing.js'
+import  drawTask, { drawAddProject, drawProject }  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
 import { refresh } from './globalFunctions.js'
 import { format } from 'date-fns'
@@ -14,7 +14,7 @@ function drawProjects(){
     container.classList.add('container')
     container.classList.add('projects-container')
 
-    
+    container.appendChild(drawAddProject())
     
     
     

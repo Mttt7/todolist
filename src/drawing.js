@@ -1,5 +1,5 @@
-import {addModal, showModal} from './modals.js'
-import {Task} from './data.js'
+import {addModal, moreProjectModal, newProjectModal, showModal} from './modals.js'
+import {Project, Task} from './data.js'
 import loadTrash from './trash.js';
 import loadCompleted from './completed.js';
 import { is } from 'date-fns/locale';
@@ -9,11 +9,11 @@ import { formatDistance } from 'date-fns'
 import { differenceInHours } from 'date-fns'
 import { isPast } from 'date-fns'
 
-
 export default function drawTask(task){
     const taskEl = document.createElement('div')
     taskEl.classList.add('task-el')
-    if(task.important==true){
+    if(task.important=='true'){
+        console.log("TASK IMPORTANT")
         taskEl.classList.add('task-el-important')
     }
         const isDone = document.createElement('input')
@@ -121,8 +121,8 @@ function drawNoProjectInfo(){
 
 export function drawProject(project){
 
-    console.log(project._tasks)
-
+    // console.log(project._tasks)
+console.log(project)
 
     const projectEl = document.createElement('div')
     projectEl.classList.add('project-el')
@@ -141,7 +141,14 @@ export function drawProject(project){
                 moreBtn.classList.add('more-btn')
                 moreBtn.classList.add('btn')
                 moreBtn.innerText='More'
+
+                moreBtn.addEventListener('click',drawMoreProjectModal)
+
+
+
                 projectBar.appendChild(moreBtn)
+
+
 
 
 
@@ -164,7 +171,20 @@ export function drawProject(project){
 }
 
 
+export function drawAddProject(){
+    const projectEl = document.createElement('div')
+    projectEl.classList.add('add-task-el')
+    projectEl.classList.add('add-project-el')
+        const newBtn = document.createElement('div')
+        newBtn.classList.add('new-btn')
+        newBtn.classList.add('btn')
+        newBtn.textContent="NEW PROJECT"
+        projectEl.appendChild(newBtn)
 
+        newBtn.addEventListener('click',drawNewProjectModal)
+
+    return projectEl
+}
 
 export function drawAddTaskEl(){
     const taskEl = document.createElement('div')
@@ -179,6 +199,19 @@ export function drawAddTaskEl(){
 
     return taskEl
 }
+
+function drawNewProjectModal(){
+    const main = document.querySelector("#main")
+    main.appendChild(newProjectModal())
+}
+function drawMoreProjectModal(e){
+    let projectTitle = e.target.parentElement.children[0].textContent
+    let project = Project.projects.find(t => t._title==projectTitle)
+    
+    const main = document.querySelector("#main")
+    main.appendChild(moreProjectModal(project))
+}
+
 
 function drawAddModal(){
     const main = document.querySelector("#main")

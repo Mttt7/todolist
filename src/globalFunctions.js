@@ -12,7 +12,7 @@ function currentWindow(){
     
     let res  = arr.find(item => item.dataset.isactive == 'true').innerText;
     
-    console.log("###current widnow: "+res)
+    
 
     return res
 }

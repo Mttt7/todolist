@@ -234,6 +234,7 @@ body{
     background-color: #02f32e;
 }
 
+
 //projects
 .projects-container{
     gap:1rem;
@@ -282,6 +283,10 @@ body{
     padding: 0 0.7rem;   
 
     
+}
+.add-project-el{
+    background: rgb(99,168,58);
+    background: linear-gradient(107deg, rgba(99,168,58,1) 2%, rgba(47,224,202,1) 100%);
 }
 .recover-btn,
 .new-btn{

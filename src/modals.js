@@ -23,6 +23,109 @@ function X(modal){
     return closeModal
 }
 
+export function newProjectModal(){
+    const modal = document.createElement('div')
+    modal.classList.add('modal')
+    modal.appendChild(X(modal))
+
+    const titleForm = document.createElement('input');
+    titleForm.type = 'text';
+    titleForm.placeholder = 'Project title';
+    titleForm.classList.add('title-form');
+    titleForm.classList.add('text-form');
+    modal.appendChild(titleForm);
+
+    const descriptionForm = document.createElement('textarea');
+    descriptionForm.placeholder = 'Description';
+    descriptionForm.classList.add('description-form');
+    descriptionForm.classList.add('text-form');
+    modal.appendChild(descriptionForm);
+
+    const submitBtn=document.createElement('div')
+    submitBtn.innerText = 'SUBMIT'
+    submitBtn.classList.add('btn')
+    submitBtn.classList.add('submit-btn')
+    
+
+    submitBtn.addEventListener('click',()=>{
+        console.log("EVENT EVENT")
+        let title = titleForm.value
+        let description = descriptionForm.value
+        
+        new Project(title,description,[])
+        refresh()
+    })
+    modal.appendChild(submitBtn)
+    
+
+    
+
+    return modal
+}
+
+export function moreProjectModal(project){
+
+    const modal = document.createElement('div')
+    modal.classList.add('modal')
+    modal.appendChild(X(modal))
+
+    const titleForm = document.createElement('input');
+    titleForm.type = 'text';
+    titleForm.placeholder = 'Project title';
+    titleForm.classList.add('title-form');
+    titleForm.classList.add('text-form');
+    modal.appendChild(titleForm);
+
+    const descriptionForm = document.createElement('textarea');
+    descriptionForm.placeholder = 'Description';
+    descriptionForm.classList.add('description-form');
+    descriptionForm.classList.add('text-form');
+    modal.appendChild(descriptionForm);
+
+        const numOfTasksDisplay = document.createElement('div')
+        const numOfDoneTasksDisplay =  document.createElement('div')
+        const toDoLeftDisplay =  document.createElement('div')
+        numOfTasksDisplay.classList.add('project-task-number-displayer')
+        numOfDoneTasksDisplay.classList.add('project-task-number-displayer')
+        numOfTasksDisplay.innerText = 'Tasks in project: '+project.tasks.length
+
+        let numOfDoneTasks=0
+        for(let i = 0;i<project.tasks.length;i++){
+            let task = Task.tasks.find(t => t.title==project.tasks[i])
+            console.log('TASK$$$:', task)
+            if(task.isDone==true) numOfDoneTasks++
+
+
+            // let arrayOfDone = Task.tasks.filter(t => t.title==project.tasks[i])
+            // console.log(arrayOfDone)
+            // let numOfDoneTasks = arrayOfDone.length
+        }
+        numOfDoneTasksDisplay.innerText = 'Done tasks: '+numOfDoneTasks
+        
+        let toDoLeft = project.tasks.length-numOfDoneTasks
+        toDoLeftDisplay.innerText='To do '+toDoLeft+' left'
+
+        modal.appendChild(numOfTasksDisplay)
+        modal.appendChild(numOfDoneTasksDisplay)
+        modal.appendChild(toDoLeftDisplay)
+
+
+    const deleteBtn=document.createElement('div')
+    deleteBtn.innerText = 'DELETE'
+    deleteBtn.classList.add('btn')
+    deleteBtn.classList.add('delete-btn')
+
+    modal.appendChild(deleteBtn)
+
+    const submitBtn=document.createElement('div')
+    submitBtn.innerText = 'SUBMIT'
+    submitBtn.classList.add('btn')
+    submitBtn.classList.add('submit-btn')
+
+    modal.appendChild(submitBtn)
+
+    return modal
+}
 
 
 
@@ -188,7 +291,7 @@ export function showModal(task){
         }
         projectSelect.selectedIndex = index
         
-        const dateForm = modal.querySelector('.date-form')
+        let dateForm = modal.querySelector('.date-form')
         if(isValid(task.date)==true){
             dateForm = modal.querySelector('.date-form')
             dateForm.value = task.date.toISOString().substring(0,10)
