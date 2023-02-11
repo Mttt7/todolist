@@ -1,8 +1,9 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import loadAll from './all.js'
 import loadCompleted from './completed.js'
-import { refresh } from './globalFunctions.js'
+import { checkDuplicate, checkUnnamedTasks, refresh } from './globalFunctions.js'
 import { isValid } from 'date-fns'
+
 
 function X(modal){
     const closeModal = document.createElement('div')
@@ -122,6 +123,11 @@ export function moreProjectModal(project){
     submitBtn.classList.add('btn')
     submitBtn.classList.add('submit-btn')
 
+    submitBtn.addEventListener('click',()=>{
+        let title = titleForm.value
+        let description = descriptionForm.value
+    })
+
     modal.appendChild(submitBtn)
 
     return modal
@@ -219,9 +225,17 @@ export function addModal(){
                 project=''
             }
             if(title==''){
-                console.log('unnamed')
-                title='unnamed'+' '+checkUnnamed()
+                let duplicateIndex=0
+                title = checkDuplicate('unnamed','unnamed','task',duplicateIndex)
+               // console.log('unnamed')
+                console.log(title)
+
+            }else{
+                let duplicateIndex=0
+                title = checkDuplicate(title,title,'task',duplicateIndex)
             }
+
+
             const task = new Task(title,description,date,important,project)
             if(project!=''){
                 addToProject(task,project)
@@ -332,7 +346,7 @@ export function showModal(task){
             }
             if(title==''){
                 
-                title='unnamed'+' '+checkUnnamed()
+                title='unnamed'+' '+checkUnnamedTasks()
             }
             
             if(project!=''){
@@ -372,22 +386,3 @@ export function projectModal(project){
 
 
 // NOT WORKING (ADD TRASH FEATURE ! ! ! )
-function checkUnnamed(){
-    let unn=0
-    console.log(Task.tasks)
-    for(let i = 0;i<Task.tasks.length;i++){
-        console.log(Task.tasks[i].title)
-        console.log('unn:',unn)
-        if(Task.tasks[i].title.slice(0,7)=='unnamed'){
-            
-            unn++
-        }
-    }
-    for(let i = 0; i<Task.trash.length;i++){
-        if(Task.trash[i].title.slice(0,7)=='unnamed'){
-            unn++
-        }
-    }
-    return unn
-    
-}

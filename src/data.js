@@ -2,6 +2,7 @@
 
 export class Project{
     static projects = []
+    static trash = []
     constructor(title,description,tasks){
         this._title = title
         this._description = description
