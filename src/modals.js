@@ -50,9 +50,19 @@ export function newProjectModal(){
 
     submitBtn.addEventListener('click',()=>{
         console.log("EVENT EVENT")
+        
         let title = titleForm.value
         let description = descriptionForm.value
         
+        if(title==''){
+            let duplicateIndex=0
+            title = checkDuplicate('unnamed project','unnamed project','project',duplicateIndex)
+        }
+        if(title!=''){
+            let duplicateIndex=0
+            title = checkDuplicate(title,title,'project',duplicateIndex)
+        }
+
         new Project(title,description,[])
         refresh()
     })
@@ -227,13 +237,12 @@ export function addModal(){
             if(title==''){
                 let duplicateIndex=0
                 title = checkDuplicate('unnamed','unnamed','task',duplicateIndex)
-               // console.log('unnamed')
-                console.log(title)
+               
 
             }
             if(title!=''){
                 let duplicateIndex=0
-                title = checkDuplicate(title,title,'task',duplicateIndex,Task.history)
+                title = checkDuplicate(title,title,'task',duplicateIndex)
             }
 
 
@@ -346,8 +355,14 @@ export function showModal(task){
                 project=''
             }
             if(title==''){
-                
-                title='unnamed'+' '+checkUnnamedTasks()
+                let duplicateIndex=0
+                title = checkDuplicate('unnamed','unnamed','task',duplicateIndex)
+               
+
+            }
+            if(title!=''){
+                let duplicateIndex=0
+                title = checkDuplicate(title,title,'task',duplicateIndex)
             }
             
             if(project!=''){

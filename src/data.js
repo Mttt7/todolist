@@ -3,11 +3,13 @@
 export class Project{
     static projects = []
     static trash = []
+    static history = []
     constructor(title,description,tasks){
         this._title = title
         this._description = description
         this._tasks = tasks
         Project.projects.push(this)
+        Project.history.push(this)
         
     }
 

@@ -71,31 +71,46 @@ export function refresh(){
 
 
                 // (title,task/project) 
-export function checkDuplicate(basedTitle,title,type,duplicateIndex,history){
+export function checkDuplicate(basedTitle,title,type,duplicateIndex){
     if(type=='task'){
-       
-        
-        
-        for(let i = 0; i<history.length; i++){
-            if(history[i].title==title){
-                //console.log(basedTitle,' o obecnej nazwie ',title,' jest w tablicy! zmieniamy mu nazwe')
+
+        for(let i = 0; i<Task.history.length; i++){
+            if(Task.history[i].title==title){
                 duplicateIndex++
                 title=basedTitle+ ' ('+duplicateIndex+')'
-               // console.log('teraz ',basedTitle,'to: ',title)
                 
-                
-                checkDuplicate(basedTitle,title,type,duplicateIndex,history)
-
+                checkDuplicate(basedTitle,title,type,duplicateIndex)
             }
             
+            
+        }  
+       
+        if(Task.history.filter(t => t.title==title).length>0){
+            var generate = require('project-name-generator')
+            title=generate().spaced
         }
-        
-            //console.log('zmienilismy nazwe z ',basedTitle,' na ',title,' koniec---')
+
         return title
-        
+    }
+    if(type=='project'){
 
+        for(let i = 0; i<Project.history.length; i++){
+            if(Project.history[i].title==title){
+                duplicateIndex++
+                title=basedTitle+ ' ('+duplicateIndex+')'
+                
+                checkDuplicate(basedTitle,title,type,duplicateIndex)
+            }
+            
+            
+        }  
+       
+        if(Project.history.filter(t => t.title==title).length>0){
+            var generate = require('project-name-generator')
+            title=generate().spaced
+        }
 
-
+        return title
     }
 }
 
