@@ -180,7 +180,10 @@ body{
     padding-top: 2rem;
 }
 
-
+//all
+.all-container{
+    gap:1rem;
+}
 .container{
     display: flex;
     flex-direction: column;
@@ -197,7 +200,7 @@ body{
     
     
     gap: 1rem;
-    margin-top: 1rem;
+    //margin-top: 1rem;
     width: 450px;
     height: 50px;
     background-color: $color3;
@@ -233,7 +236,10 @@ body{
 .task-el-important{
     background-color: #02f32e;
 }
-
+//trash
+.trash-container{
+    gap:1rem;
+}
 
 //projects
 .projects-container{

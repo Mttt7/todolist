@@ -80,7 +80,12 @@ export function moreProjectModal(project){
     modal.classList.add('modal')
     modal.appendChild(X(modal))
 
+   
+
+
+
     const titleForm = document.createElement('input');
+    titleForm.value = project.title
     titleForm.type = 'text';
     titleForm.placeholder = 'Project title';
     titleForm.classList.add('title-form');
@@ -88,6 +93,7 @@ export function moreProjectModal(project){
     modal.appendChild(titleForm);
 
     const descriptionForm = document.createElement('textarea');
+    descriptionForm.value = project.description
     descriptionForm.placeholder = 'Description';
     descriptionForm.classList.add('description-form');
     descriptionForm.classList.add('text-form');
@@ -105,11 +111,6 @@ export function moreProjectModal(project){
             let task = Task.tasks.find(t => t.title==project.tasks[i])
             console.log('TASK$$$:', task)
             if(task.isDone==true) numOfDoneTasks++
-
-
-            // let arrayOfDone = Task.tasks.filter(t => t.title==project.tasks[i])
-            // console.log(arrayOfDone)
-            // let numOfDoneTasks = arrayOfDone.length
         }
         numOfDoneTasksDisplay.innerText = 'Done tasks: '+numOfDoneTasks
         
@@ -126,6 +127,12 @@ export function moreProjectModal(project){
     deleteBtn.classList.add('btn')
     deleteBtn.classList.add('delete-btn')
 
+    deleteBtn.addEventListener('click',()=>{
+        Project.trash.push(project)
+        Project.projects = Project.projects.filter((p)=>p.title!=project.title)
+        refresh()
+    })
+
     modal.appendChild(deleteBtn)
 
     const submitBtn=document.createElement('div')
@@ -133,9 +140,29 @@ export function moreProjectModal(project){
     submitBtn.classList.add('btn')
     submitBtn.classList.add('submit-btn')
 
+       
+
     submitBtn.addEventListener('click',()=>{
         let title = titleForm.value
         let description = descriptionForm.value
+
+        if(title==''){
+            let duplicateIndex=0
+            title = checkDuplicate('unnamed project','unnamed project','project',duplicateIndex)
+           
+
+        }
+        if(title!=''){
+            let duplicateIndex=0
+            title = checkDuplicate(title,title,'project',duplicateIndex)
+        }
+
+        project.title = title
+        project.description = description
+
+
+        refresh()
+
     })
 
     modal.appendChild(submitBtn)
@@ -280,8 +307,6 @@ export function showModal(task){
         modal.appendChild(deleteBtn)
 
         deleteBtn.addEventListener('click',()=>{
-            console.log('#task title:',task.title)
-            console.log('#tasks:',Task.tasks)
             Task.trash.push(task)
             Task.tasks = Task.tasks.filter((t)=>t.title!=task.title)
             refresh()
@@ -335,9 +360,6 @@ export function showModal(task){
             importantForm.classList.remove('not-important')
         }
 
-        
-
-
         const submitBtn = modal.querySelector('.submit-btn')
         //*cloning nodes to remove all event listeners from submit btn
         const editSubmitBtn = submitBtn.cloneNode(true)
@@ -380,8 +402,6 @@ export function showModal(task){
 
 
 
-            console.log(task)
-
         })
 
 
@@ -395,10 +415,5 @@ export function showModal(task){
     return modal
 }
 
-export function projectModal(project){
-    
-}
 
 
-
-// NOT WORKING (ADD TRASH FEATURE ! ! ! )

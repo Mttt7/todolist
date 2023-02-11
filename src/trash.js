@@ -1,11 +1,12 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
-import  {drawTaskInTrash}  from './drawing.js'
+import  {drawProjectInTrash, drawTaskInTrash}  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
 
 
 function drawTrash(){
     const container = document.createElement('div')
     container.classList.add('container')
+    container.classList.add('trash-container')
 
     
     
@@ -16,6 +17,10 @@ function drawTrash(){
         
         container.append(taskEl)
 
+    }
+    for(let i = 0; i<Project.trash.length;i++){
+        const projectEl = drawProjectInTrash(Project.trash[i])
+        container.append(projectEl)
     }
 
 

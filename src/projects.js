@@ -32,10 +32,6 @@ function drawProjects(){
     return container
 }
 
-
-
-
-
 export default function loadProjects(){
     const main = document.querySelector("#main")
     const navBar = document.querySelector(".nav-bar")

@@ -134,7 +134,7 @@ console.log(project)
 
                 const projectTitle = document.createElement('div')
                 projectTitle.classList.add('project-title')
-                projectTitle.innerText=project.title
+                projectTitle.innerText = project.title
                 projectBar.appendChild(projectTitle)
 
                 const moreBtn = document.createElement('div')
@@ -205,13 +205,43 @@ function drawNewProjectModal(){
     main.appendChild(newProjectModal())
 }
 function drawMoreProjectModal(e){
+    const main = document.querySelector("#main")
     let projectTitle = e.target.parentElement.children[0].textContent
     let project = Project.projects.find(t => t._title==projectTitle)
     
-    const main = document.querySelector("#main")
     main.appendChild(moreProjectModal(project))
 }
+export function drawProjectInTrash(project){
 
+    
+    const projectEl = drawProject(project)
+
+    const projectBar = projectEl.querySelector('.project-bar')
+    projectBar.removeChild(projectBar.querySelector('.more-btn'))
+    
+    const recoverBtn = document.createElement('div')
+        recoverBtn.classList.add('recover-btn')
+        
+        recoverBtn.classList.add('recover-btn-project')
+        recoverBtn.classList.add('btn')
+        recoverBtn.innerText='Recover'
+        projectBar.appendChild(recoverBtn)
+
+        recoverBtn.addEventListener('click',()=>{
+            
+            Project.trash = Project.trash.filter(p=>p.title!=project.title)
+            
+            Project.projects.push(project)
+           
+            refresh()
+            
+        })
+
+
+    
+    return projectEl
+
+}
 
 function drawAddModal(){
     const main = document.querySelector("#main")
@@ -223,8 +253,6 @@ function drawShowModal(e){
     const main = document.querySelector("#main")
     let taskTitle = e.target.parentElement.children[1].textContent
     let task = Task.tasks.find(t => t._title==taskTitle)
-    console.log(task)
+    
     main.appendChild(showModal(task))
-
-
 }

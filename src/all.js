@@ -15,6 +15,7 @@ const p3 = new Project('projekt3','opis projektu',[])
 function drawAll(){
     const container = document.createElement('div')
     container.classList.add('container')
+    container.classList.add('all-container')
 
     
     
