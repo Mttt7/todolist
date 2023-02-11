@@ -26,6 +26,7 @@ export class Project{
 export class Task{
     static tasks = []
     static trash = []
+    static history = []
 
     constructor(title,description,date,important,project){
         this._title = title
@@ -36,6 +37,7 @@ export class Task{
         this._isDone = false
 
         Task.tasks.push(this)
+        Task.history.push(this)
     }
 
     get title(){ return this._title}

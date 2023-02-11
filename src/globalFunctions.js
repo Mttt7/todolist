@@ -71,24 +71,26 @@ export function refresh(){
 
 
                 // (title,task/project) 
-export function checkDuplicate(basedTitle,title,type,duplicateIndex){
+export function checkDuplicate(basedTitle,title,type,duplicateIndex,history){
     if(type=='task'){
-        for(let i = 0; i<Task.tasks.length; i++){
-            console.log("loop working---")
-            console.log(Task.tasks[i].title)
-            if(Task.tasks[i].title==title){
-                console.log("DUPLICATE DETECTED!!!")
+       
+        
+        
+        for(let i = 0; i<history.length; i++){
+            if(history[i].title==title){
+                //console.log(basedTitle,' o obecnej nazwie ',title,' jest w tablicy! zmieniamy mu nazwe')
                 duplicateIndex++
                 title=basedTitle+ ' ('+duplicateIndex+')'
+               // console.log('teraz ',basedTitle,'to: ',title)
                 
                 
-                checkDuplicate(basedTitle,title,type,duplicateIndex)
+                checkDuplicate(basedTitle,title,type,duplicateIndex,history)
 
             }
             
         }
         
-            
+            //console.log('zmienilismy nazwe z ',basedTitle,' na ',title,' koniec---')
         return title
         
 
@@ -96,3 +98,31 @@ export function checkDuplicate(basedTitle,title,type,duplicateIndex){
 
     }
 }
+
+
+
+// export function checkDuplicate(basedTitle,title,type,duplicateIndex){
+//     if(type=='task'){
+//         for(let i = 0; i<Task.tasks.length; i++){
+//             console.log("loop working---")
+//             console.log(Task.tasks[i].title)
+//             if(Task.tasks[i].title==title){
+//                 console.log("DUPLICATE DETECTED!!!")
+//                 duplicateIndex++
+//                 title=basedTitle+ ' ('+duplicateIndex+')'
+                
+                
+//                 checkDuplicate(basedTitle,title,type,duplicateIndex)
+
+//             }
+            
+//         }
+        
+            
+//         return title
+        
+
+
+
+//     }
+// }

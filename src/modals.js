@@ -230,9 +230,10 @@ export function addModal(){
                // console.log('unnamed')
                 console.log(title)
 
-            }else{
+            }
+            if(title!=''){
                 let duplicateIndex=0
-                title = checkDuplicate(title,title,'task',duplicateIndex)
+                title = checkDuplicate(title,title,'task',duplicateIndex,Task.history)
             }
 
 
