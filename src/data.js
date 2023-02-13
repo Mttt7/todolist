@@ -73,9 +73,15 @@ export function addToProject(task,projectTit){
 }
 
 export function deleteFromProject(task,project){
-    let toDel = task._project
-    task._project=''
-    project._tasks = project._tasks.filter(t =>t!==task.title)
-    console.log("deleted ",toDel,"from ",project.title)
+    
+        let toDel = task.title
+        console.log('toDel:',toDel)
+        console.log(project.title)
+        console.log(project.tasks)
+        
+        project._tasks=project._tasks.filter(t => t!=toDel)
+        console.log(project.tasks)
+    
+    
 }
 

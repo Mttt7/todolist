@@ -6,6 +6,7 @@ import loadThisWeek from "./thisWeek";
 import loadProjects from "./projects";
 import { Project, Task } from "./data";
 import { drawTaskInTrash } from "./drawing";
+import { isValid } from 'date-fns'
 
 function currentWindow(){
     
@@ -72,4 +73,62 @@ export function checkDuplicate(basedTitle,title,type,duplicateIndex){
     }
 }
 
+export function sortTasks(mode){
+    if(mode=='tasks'){
+        Task.tasks.sort(function(a,b){
+            if(!isValid(a.date) && !isValid(b.date) && a.important!=b.important){
+                console.log('Ten warunek')
+                return a.important > b.important ? -1 : 1
+            }
+            if(!isValid(a.date) && isValid(b.date)){
+                return 1
+            }
+            if(isValid(a.date) && !isValid(b.date)){
+                return -1
+            }
+            if(a.date-b.date==0 && a.important!=b.important){
+                console.log('a: ',a.important,' b: ',b.important)
+                return a.important > b.important ? -1 : 1
+            }else{
+                console.log('x')
+                return a.date - b.date
+            }
+            
+        })
+    }
+    if(mode=='trash'){
+        Task.trash.sort(function(a,b){
+            if(!isValid(a.date) && !isValid(b.date) && a.important!=b.important){
+                console.log('Ten warunek')
+                return a.important > b.important ? -1 : 1
+            }
+            if(!isValid(a.date) && isValid(b.date)){
+                return 1
+            }
+            if(isValid(a.date) && !isValid(b.date)){
+                return -1
+            }
+            if(a.date-b.date==0 && a.important!=b.important){
+                console.log('a: ',a.important,' b: ',b.important)
+                return a.important > b.important ? -1 : 1
+            }else{
+                console.log('x')
+                return a.date - b.date
+            }
+        })
+    }
+    
+}
 
+// export function sortProjects(mode){
+//     if(mode=='projects'){
+//         Project.projects.sort(function(a,b){
+//             return a.date - b.date
+//         })
+//     }
+//     if(mode=='trash'){
+//         Project.trash.sort(function(a,b){
+//             return a.date - b.date
+//         })
+//     }
+// }

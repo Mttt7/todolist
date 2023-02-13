@@ -1,6 +1,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import  drawTask  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
+import { sortTasks } from './globalFunctions.js'
 
 
 
@@ -11,7 +12,7 @@ function drawCompleted(){
     
     
     
-    
+    sortTasks('tasks')
     for(let i=0;i<Task.tasks.length;i++){
         if(Task.tasks[i].isDone==true){
             const taskEl = drawTask(Task.tasks[i])

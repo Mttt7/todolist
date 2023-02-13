@@ -2,7 +2,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import  drawTask, { drawAddProject, drawProject }  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
-import { refresh } from './globalFunctions.js'
+import { refresh, sortProjects } from './globalFunctions.js'
 import { format } from 'date-fns'
 import { isSameWeek } from 'date-fns'
 import { isPast } from 'date-fns'

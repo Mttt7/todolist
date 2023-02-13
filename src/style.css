@@ -192,13 +192,20 @@ body {
 }
 
 .project-el {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
   background: rgb(99, 168, 58);
   background: linear-gradient(107deg, rgb(99, 168, 58) 2%, rgb(47, 224, 202) 100%);
   padding: 2rem;
   border-radius: 20px;
 }
 .project-el .project-bar {
+  width: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }

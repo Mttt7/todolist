@@ -3,13 +3,14 @@ import {Project, Task} from './data.js'
 import loadTrash from './trash.js';
 import loadCompleted from './completed.js';
 import { is } from 'date-fns/locale';
-import { refresh } from './globalFunctions.js';
+import { refresh, sortTasks } from './globalFunctions.js';
 import { format, isToday } from 'date-fns'
 import { formatDistance } from 'date-fns'
 import { differenceInHours } from 'date-fns'
 import { isPast } from 'date-fns'
 
 export default function drawTask(task){
+    //console.log("XXXXXXXXXXXXXXXX: ",task)
     const taskEl = document.createElement('div')
     taskEl.classList.add('task-el')
     if(task.important=='true'){
@@ -154,8 +155,10 @@ console.log(project)
 
 
     //adding tasks to project:
+        sortTasks('tasks')
         for(let i = 0;i<project.tasks.length;i++){
             const t = Task.tasks.find(e => e.title==project.tasks[i])
+            
             const taskEl = drawTask(t)
             projectEl.appendChild(taskEl)
         }

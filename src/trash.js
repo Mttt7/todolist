@@ -1,6 +1,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import  {drawProjectInTrash, drawTaskInTrash}  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
+import { sortProjects, sortTasks } from './globalFunctions.js'
 
 
 function drawTrash(){
@@ -11,13 +12,14 @@ function drawTrash(){
     
     
     
-    
+    sortTasks('trash')
     for(let i=0;i<Task.trash.length;i++){
         const taskEl = drawTaskInTrash(Task.trash[i])
         
         container.append(taskEl)
 
     }
+    
     for(let i = 0; i<Project.trash.length;i++){
         const projectEl = drawProjectInTrash(Project.trash[i])
         container.append(projectEl)

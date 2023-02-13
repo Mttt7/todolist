@@ -2,7 +2,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import  drawTask  from './drawing.js'
 import {drawAddTaskEl} from './drawing.js'
-import { refresh } from './globalFunctions.js'
+import { refresh, sortProjects, sortTasks } from './globalFunctions.js'
 import { format } from 'date-fns'
 import { isSameWeek } from 'date-fns'
 
@@ -17,6 +17,7 @@ function drawThisWeek(){
     
     
     container.append(drawAddTaskEl())
+    sortTasks('tasks')
     for(let i=0;i<Task.tasks.length;i++){
         if(Task.tasks[i].isDone==false && (isSameWeek(Task.tasks[i].date, new Date())) ){
 

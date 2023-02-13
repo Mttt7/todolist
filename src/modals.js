@@ -1,7 +1,7 @@
 import { Project, Task, addToProject, deleteFromProject } from './data.js'
 import loadAll from './all.js'
 import loadCompleted from './completed.js'
-import { checkDuplicate, checkUnnamedTasks, refresh } from './globalFunctions.js'
+import { checkDuplicate, checkUnnamedTasks, refresh, sortTasks } from './globalFunctions.js'
 import { isValid } from 'date-fns'
 
 
@@ -86,6 +86,7 @@ export function moreProjectModal(project){
 
     const titleForm = document.createElement('input');
     titleForm.value = project.title
+    let oldTitle = titleForm.value
     titleForm.type = 'text';
     titleForm.placeholder = 'Project title';
     titleForm.classList.add('title-form');
@@ -154,7 +155,10 @@ export function moreProjectModal(project){
         }
         if(title!=''){
             let duplicateIndex=0
-            title = checkDuplicate(title,title,'project',duplicateIndex)
+            if(title!=oldTitle){
+                title = checkDuplicate(title,title,'project',duplicateIndex)
+            }
+            
         }
 
         project.title = title
@@ -318,6 +322,7 @@ export function showModal(task){
     modal.classList.add('edit-modal')
         const titleForm = modal.querySelector('.title-form')
         titleForm.value = task.title
+        let oldTitle=titleForm.value
         
         const descriptionForm = modal.querySelector('.description-form')
         descriptionForm.value = task.description
@@ -326,20 +331,29 @@ export function showModal(task){
 
         let index=0
         
+        let oldProject=null 
         if(task.project!=''){
+
             console.log('PROJECT EXIST')
             for(let i = 0;i<=Project.projects.length;i++){
 
                 if(task.project==projectSelect.options[i].innerText){
-                    
+
+                   
                     index = (projectSelect.options[i].value) 
                    
                 }
 
             }
+            oldProject = projectSelect.options[index].innerText
+            oldProject = Project.projects.find(p => p.title==oldProject)
+            console.log(oldProject)
         }
         projectSelect.selectedIndex = index
         
+        
+        
+
         let dateForm = modal.querySelector('.date-form')
         if(isValid(task.date)==true){
             dateForm = modal.querySelector('.date-form')
@@ -367,6 +381,9 @@ export function showModal(task){
 
         editSubmitBtn.addEventListener('click',()=>{
 
+           //deleteFromProject(task,oldProject)
+            
+
             let title = titleForm.value
             let description = descriptionForm.value
             let project = projectSelect.options[projectSelect.selectedIndex].text
@@ -378,18 +395,37 @@ export function showModal(task){
             }
             if(title==''){
                 let duplicateIndex=0
+                
                 title = checkDuplicate('unnamed','unnamed','task',duplicateIndex)
                
 
             }
             if(title!=''){
                 let duplicateIndex=0
-                title = checkDuplicate(title,title,'task',duplicateIndex)
+                if(title!=oldTitle){
+                    title = checkDuplicate(title,title,'task',duplicateIndex)
+                }
+                
             }
             
-            if(project!=''){
+            if(project!='' && oldProject!=null){
+                // console.log(task)
+                // console.log('OLD: ',oldProject)
+                // console.log('NEW:',project)
+                console.log('---NOWY NIE PUSTY oraz STARY NIE PUSTY')
+                deleteFromProject(task,oldProject)
+                addToProject(task,project)
+               
+            }
+            else if(project!='' && oldProject==null){
+                console.log('NOWY NIE PUSTY oraz STARY PUSTY')
                 addToProject(task,project)
             }
+            else if(project=='' && oldProject!=null){
+                console.log('NOWY PUSTY oraz STARY PUSTY')
+                deleteFromProject(task,oldProject)
+            }
+
 
             task.title = title
             task.description=description
@@ -397,6 +433,7 @@ export function showModal(task){
             task.important = important
             task.date=date
 
+            
             
             refresh()
 
