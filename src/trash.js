@@ -48,5 +48,8 @@ export default function loadTrash(){
 
 
     main.textContent=''
+    
     main.appendChild(drawTrash())
+    console.log('TRASH: ',Task.trash[0])
+    console.log('PROJECT: ',Project.trash[0])
 }

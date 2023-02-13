@@ -129,8 +129,15 @@ export function moreProjectModal(project){
     deleteBtn.classList.add('delete-btn')
 
     deleteBtn.addEventListener('click',()=>{
+        for(let i = 0;i<project.tasks.length; i++){
+            let task = Task.tasks.find(t => t.title==project.tasks[i])
+            Task.trash.push(task)
+            Task.tasks = Task.tasks.filter((t)=>t.title!=task.title)
+            deleteFromProject(task,project)
+        }
         Project.trash.push(project)
         Project.projects = Project.projects.filter((p)=>p.title!=project.title)
+
         refresh()
     })
 
@@ -313,6 +320,12 @@ export function showModal(task){
         deleteBtn.addEventListener('click',()=>{
             Task.trash.push(task)
             Task.tasks = Task.tasks.filter((t)=>t.title!=task.title)
+            if(task.project!=''){
+                let project = Project.projects.find(p => p.title==task.project)
+                deleteFromProject(task,project)
+                console.log('DELETED')
+            }
+            
             refresh()
         })
 

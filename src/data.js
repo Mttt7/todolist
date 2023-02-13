@@ -80,6 +80,7 @@ export function deleteFromProject(task,project){
         console.log(project.tasks)
         
         project._tasks=project._tasks.filter(t => t!=toDel)
+        task.project=''
         console.log(project.tasks)
     
     

@@ -1,8 +1,8 @@
 import {addModal, moreProjectModal, newProjectModal, showModal} from './modals.js'
-import {Project, Task} from './data.js'
+import {deleteFromProject, Project, Task} from './data.js'
 import loadTrash from './trash.js';
 import loadCompleted from './completed.js';
-import { is } from 'date-fns/locale';
+import { is, ta } from 'date-fns/locale';
 import { refresh, sortTasks } from './globalFunctions.js';
 import { format, isToday } from 'date-fns'
 import { formatDistance } from 'date-fns'
@@ -103,6 +103,20 @@ export function drawTaskInTrash(task){
             refresh()
             
         })
+
+    const permDelete=document.createElement('div')
+        permDelete.classList.add('recover-btn')
+        permDelete.classList.add('btn')
+        permDelete.innerText = 'Permanent Delete'
+
+        permDelete.addEventListener('click', ()=>{
+            Task.history.filter(t => t.title!=task.title)
+
+        })
+
+
+
+        taskEl.appendChild(permDelete)
 
 
     
@@ -231,11 +245,15 @@ export function drawProjectInTrash(project){
         projectBar.appendChild(recoverBtn)
 
         recoverBtn.addEventListener('click',()=>{
-            
             Project.trash = Project.trash.filter(p=>p.title!=project.title)
-            
             Project.projects.push(project)
+            
            
+            // for(let i=0;i<project.tasks.length;i++){
+            //     let task = Task.trash.find(t => t.title = project.tasks[i])
+            //     console.log("HEEEEEEEEEEEEEEE->>",task)
+            //     deleteFromProject(task,project)
+            // }
             refresh()
             
         })
