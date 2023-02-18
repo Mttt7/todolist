@@ -181,7 +181,9 @@ console.log(project)
                 const moreBtn = document.createElement('div')
                 moreBtn.classList.add('more-btn')
                 moreBtn.classList.add('btn')
-                moreBtn.innerText='More'
+                const moreImg = new Image()
+                moreImg.src = moreSrc
+                moreBtn.appendChild(moreImg)
 
                 moreBtn.addEventListener('click',drawMoreProjectModal)
 
@@ -253,7 +255,7 @@ function drawNewProjectModal(){
 }
 function drawMoreProjectModal(e){
     const main = document.querySelector("#main")
-    let projectTitle = e.target.parentElement.children[0].textContent
+    let projectTitle = e.target.parentElement.parentElement.children[0].textContent
     let project = Project.projects.find(t => t._title==projectTitle)
     
     main.appendChild(moreProjectModal(project))

@@ -233,11 +233,11 @@ body {
 }
 .project-el .project-bar .more-btn {
   margin-left: auto;
-  color: white;
-  background-color: rgb(178, 0, 248);
   padding: 0.4rem;
-  border-radius: 10px;
-  font-weight: 600;
+}
+.project-el .project-bar .more-btn > img {
+  width: 40px;
+  height: 40px;
 }
 
 .add-task-el {
