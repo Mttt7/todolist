@@ -3,6 +3,9 @@ import loadAll from './all.js'
 import loadCompleted from './completed.js'
 import { checkDuplicate, checkUnnamedTasks, refresh, sortTasks } from './globalFunctions.js'
 import { isValid } from 'date-fns'
+import { isPast } from 'date-fns'
+
+
 
 
 function X(modal){
@@ -19,6 +22,8 @@ function X(modal){
         closeModal.addEventListener('click',()=>{
            // modal.style.display='none'
             const main = document.querySelector("#main")
+            const modalBackground = document.querySelector('#modal-background')
+            modalBackground.style.display='none'
             main.removeChild(modal)
         })  
     return closeModal
@@ -28,6 +33,10 @@ export function newProjectModal(){
     const modal = document.createElement('div')
     modal.classList.add('modal')
     modal.appendChild(X(modal))
+
+    const modalBackground = document.querySelector('#modal-background')
+    modalBackground.style.display='block'
+
 
     const titleForm = document.createElement('input');
     titleForm.type = 'text';
@@ -80,6 +89,8 @@ export function moreProjectModal(project){
     modal.classList.add('modal')
     modal.appendChild(X(modal))
 
+    const modalBackground = document.querySelector('#modal-background')
+    modalBackground.style.display='block'
    
 
 
@@ -129,11 +140,14 @@ export function moreProjectModal(project){
     deleteBtn.classList.add('delete-btn')
 
     deleteBtn.addEventListener('click',()=>{
+        console.log(project.tasks.length)
+        console.log(project.tasks)
         for(let i = 0;i<project.tasks.length; i++){
             let task = Task.tasks.find(t => t.title==project.tasks[i])
             Task.trash.push(task)
             Task.tasks = Task.tasks.filter((t)=>t.title!=task.title)
             deleteFromProject(task,project)
+            i--
         }
         Project.trash.push(project)
         Project.projects = Project.projects.filter((p)=>p.title!=project.title)
@@ -188,7 +202,8 @@ export function addModal(){
     modal.classList.add('modal')
     modal.classList.add('add-modal')
     modal.style.display='flex'
-    
+    const modalBackground = document.querySelector('#modal-background')
+    modalBackground.style.display='block'
 
     modal.appendChild(X(modal))
        
@@ -311,11 +326,15 @@ export function addModal(){
 
 export function showModal(task){
     const modal = addModal()
+    const modalBackground = document.querySelector('#modal-background')
+    modalBackground.style.display='block'
+    const buttons = document.createElement('div')
+    buttons.classList.add('buttons')
         const deleteBtn = document.createElement('div')
         deleteBtn.classList.add('delete-btn')
         deleteBtn.classList.add('btn')
         deleteBtn.textContent = 'DELETE'
-        modal.appendChild(deleteBtn)
+        buttons.appendChild(deleteBtn)
 
         deleteBtn.addEventListener('click',()=>{
             Task.trash.push(task)
@@ -388,9 +407,11 @@ export function showModal(task){
         }
 
         const submitBtn = modal.querySelector('.submit-btn')
-        //*cloning nodes to remove all event listeners from submit btn
+        
         const editSubmitBtn = submitBtn.cloneNode(true)
-        submitBtn.parentNode.replaceChild(editSubmitBtn,submitBtn)
+        buttons.appendChild(editSubmitBtn)
+        modal.removeChild(submitBtn)
+        //submitBtn.parentNode.replaceChild(editSubmitBtn,submitBtn)
 
         editSubmitBtn.addEventListener('click',()=>{
 
@@ -446,6 +467,11 @@ export function showModal(task){
             task.important = important
             task.date=date
 
+            if(isPast(task.date)){
+                task.isOverdue = true
+            }else{
+                task.isOverdue = false
+            }
             
             
             refresh()
@@ -453,9 +479,10 @@ export function showModal(task){
 
 
         })
+        refresh()
 
 
-
+        modal.appendChild(buttons)
     modal.appendChild(X(modal))
 
 

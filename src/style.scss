@@ -1,10 +1,18 @@
 //--- global variables ---//
 $color1:rgb(221, 76, 61);
-$color2:rgb(254, 254, 254);
-$color3:rgb(244, 238, 238);
+$color2:rgb(230, 230, 234);
+$color3:rgb(244, 244, 248);
+$color4:rgb(42, 183, 202);
+$color5:rgb(254, 215, 102);
 $font-color:rgb(31, 31, 31);
+$project-gradient:linear-gradient(107deg, rgba(168,58,163,1) 2%, rgba(84,190,252,0.5300925925925926) 67%, rgba(30,232,255,0) 100%);
+$task-important-gradient:linear-gradient(107deg, rgba(213,59,59,0.9861111111111112) 2%, rgba(213,59,117,0.9861111111111112) 44%, rgba(255,30,158,0.1342592592592593) 100%);
+$task-not-important-gradient:linear-gradient(107deg, rgba(0,81,255,1) 2%, rgba(59,213,172,0.9861111111111112) 44%, rgba(255,30,158,0.06712962962962965) 100%);
+
+
 body{
     font-family: 'Poppins', sans-serif;
+    
 }
 
 #content{
@@ -13,6 +21,7 @@ body{
     display: grid;
     grid-template-columns: 1fr 10fr;
     grid-template-rows: 100px 1fr 1fr;
+    overflow: hidden;
 }
 
 .header{
@@ -82,6 +91,7 @@ body{
 
     gap: 0.45rem;
     padding: 1rem;
+    padding-bottom:0 ;
 
     animation: fade 0.2s;
 
@@ -94,21 +104,26 @@ body{
     }
 
     .links{
+        width: 100%;
+        height: 100%;
+        display: flex;
         
-        .ig-img{
-            width: 30px;
+        align-items: center;
+        justify-content: center;
+        .mobile-ig-img{
+        width: 60px;
         }
-        .ig-img:hover{
+        .mobile-ig-img:hover{
+            transform: scale(1.1);
             cursor: pointer;
-            transform: scale(1.03);
         }
-        .github-img{
+
+        .mobile-github-img{
             width: 60px;
-            
         }
-        .github-img:hover{
+        .mobile-github-img:hover{
+            transform: scale(1.1);
             cursor: pointer;
-            transform: scale(1.03);
         }
     }
 
@@ -139,6 +154,7 @@ body{
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
+    padding-bottom: 0;
     height: 100%;
     width: 160px;
     
@@ -171,9 +187,12 @@ body{
 
 }
 
+
+
 .main{
     grid-column: 2/4;
     grid-row: 2/4;
+    overflow: auto;
 }
 .main.shrink{
     grid-row: 3/4;
@@ -181,26 +200,41 @@ body{
 }
 
 //all
-.all-container{
-    gap:1rem;
-}
+
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-
+    gap:1rem;
     padding: 2rem;
+    overflow: auto;
+   
 }
 
 //drawing.js
+
+.task-in-trash-el{
+    justify-content: space-evenly;
+    padding: 0 1rem;
+
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+
 .task-el{
+    border: solid 2px black;
+    background:$task-not-important-gradient;
     display: flex;
     align-items: center;
     
     
     gap: 1rem;
-    //margin-top: 1rem;
+    
     width: 450px;
     height: 50px;
     background-color: $color3;
@@ -216,43 +250,44 @@ body{
         
     }
 
-    .task-title{
-
-    }
-
-    .show-btn,
-    .recover-btn{
+    .task-date{
         margin-left: auto;
-        color: white;
-        background-color: red;
-        padding: 0.4rem;
-        border-radius: 10px;
-        font-weight: 600;
+        color: $color3;
+        font-weight: 700;
     }
+
+    .task-date>img{
+        width: 37px;
+        
+        
+    }
+
+
     
 
 
 }
 .task-el-important{
-    background-color: #02f32e;
+    background:$task-important-gradient;
+    color: $color3;
+    font-weight: 700;
+    border: solid 2px black;
 }
-//trash
-.trash-container{
-    gap:1rem;
+.task-el.overdue{
+    .task-date{
+        color:$color1;
+    }
+    
 }
 
-//projects
-.projects-container{
-    gap:1rem;
-}
 .project-el{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     gap:1rem;
-    background: rgb(99,168,58);
-    background: linear-gradient(107deg, rgba(99,168,58,1) 2%, rgba(47,224,202,1) 100%);
+    
+    background: linear-gradient(107deg, rgba(168,58,163,1) 2%, rgba(84,190,252,0.5300925925925926) 67%, rgba(30,232,255,0) 100%);
     padding: 2rem;
     border-radius: 20px;
 
@@ -293,18 +328,17 @@ body{
     background-color: $color3;
     border-radius: 20px;
     padding: 0 0.7rem;   
-
+    background: $task-not-important-gradient;
     
 }
 .add-project-el{
-    background: rgb(99,168,58);
-    background: linear-gradient(107deg, rgba(99,168,58,1) 2%, rgba(47,224,202,1) 100%);
-}
+    
+    background: linear-gradient(107deg, rgba(168,58,163,1) 2%, rgba(84,190,252,0.5300925925925926) 67%, rgba(30,232,255,0) 100%);
+    }
 .recover-btn,
 .new-btn{
-    background-color: $color1;
-    color: white;
-    background-color: red;
+    
+    
     padding: 0.4rem;
     border-radius: 10px;
     font-weight: 600;
@@ -313,14 +347,30 @@ body{
 
 
 .btn{
+    
     cursor: pointer;
+}
+.btn>*{
+    height: 30px;
 }
 .btn:hover{
     transform: scale(1.05);
 }
 
 //modal
+#modal-background{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    z-index: 5;
+    opacity: 80%;
+}
 .modal {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -333,21 +383,22 @@ body{
     transform: translate(-50%, -50%);
 
     width: 400px;
-    height: 50%;
+    height: fit-content;
     border-radius: 20px;
 
-    background-color: gray;
-    
+    background:$color3;
+    z-index: 10;
 
+    
     .text-form{
         padding: 9px;
         font-size: 22px;
         border-width: 0px;
-        border-color: #ed0000;
-        background-color: #ffffff;
+        
+        background-color: $color3;
         color: #000000;
         border-style: solid;
-        border-radius: 30px;
+        border-radius: 10px;
         box-shadow: 0px 0px 8px rgba(66,66,66,.2);
         text-shadow: 0px 0px 0px rgba(66,66,66,.75);
 
@@ -377,7 +428,7 @@ body{
             background-color: #ffffff;
             color: #000000;
             border-style: solid;
-            border-radius: 30px;
+            border-radius: 10px;
             box-shadow: 0px 0px 8px rgba(66,66,66,.2);
             text-shadow: 0px 0px 0px rgba(66,66,66,.75);
     
@@ -393,7 +444,7 @@ body{
         background-color: #ffffff;
         color: #000000;
         border-style: solid;
-        border-radius: 30px;
+        border-radius: 10px;
         box-shadow: 0px 0px 8px rgba(66,66,66,.2);
         text-shadow: 0px 0px 0px rgba(66,66,66,.75);
 
@@ -419,12 +470,17 @@ body{
         cursor: pointer;
     }
     .not-important{
-        color: #ed0000;
+        
+        background: -webkit-linear-gradient(107deg, rgba(168,58,58,1) 2%, rgb(235, 148, 105) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+       
         
     }
     .important{
-        color: #02f32e;
-
+        background: -webkit-linear-gradient(107deg, rgba(99,168,58,1) 2%, rgba(105,235,219,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     
 
@@ -442,12 +498,22 @@ body{
         height: 30px;
         
     }
+    .close-modal:hover{
+        .line:first-child {
+            transform: rotate(230deg);
+            
+          }
+          
+          .line:last-child {
+            transform: rotate(140deg);
+          }
+    }
     .line {
         
         position: absolute;
         width: 100%;
         height: 5px;
-        background-color: white;
+        background-color: $color1;
         
         transition: transform 0.2s ease;
         
@@ -469,20 +535,20 @@ body{
         color: $color2;
         font-weight: 600;
         background-color: $color1;
-        padding: 0.5rem 5rem;
+        padding: 1.1rem 5rem;
         border-radius: 20px;
-        margin-top: auto;
+        
         margin-bottom: 1rem;
     }
+    .buttons{
+       // margin-top: auto;
+    }
     .delete-btn{
-        margin-top: 0;
+        
         margin-bottom: 0.3rem;
     }
 }
 
-.add-modal{
-
-}
 
 
 
@@ -497,12 +563,19 @@ body{
 }
 
 @media only screen and (max-width:700px){
+    .container{
+        // padding-left: 0;
+        // padding-right: 0;
+        overflow: hidden;
+    }
     .nav-bar{
         display: none;
     }
 
     .task-el{
-        width: 300px;
+        width: 90%;
+        height: 100%;
+        
     }
     .add-task-el{
         width: 300px;
@@ -512,17 +585,32 @@ body{
     .main{
         grid-column: 1/4;
     }
+
+
+
    
 }
 
 
 
+//scrollbar
+.main::-webkit-scrollbar{
+width: .8rem;
+}
 
 
+.main::-webkit-scrollbar-track{
+    background-color:$color2;
+    border-radius: 100vw;
+    margin-block-start: .5em;
+    
+}
 
+.main::-webkit-scrollbar-thumb{
+    background-color: $color1;
+    border-radius: 100vw;
 
-
-
+}
 
 
 

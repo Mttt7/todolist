@@ -4,18 +4,26 @@ import loadTrash from './trash.js';
 import loadCompleted from './completed.js';
 import { is, ta } from 'date-fns/locale';
 import { refresh, sortTasks } from './globalFunctions.js';
-import { format, isToday } from 'date-fns'
+import { add, format, isToday } from 'date-fns'
 import { formatDistance } from 'date-fns'
 import { differenceInHours } from 'date-fns'
 import { isPast } from 'date-fns'
+import moreSrc from './images/more.png'
+import addSrc from './images/add.png'
+import recoverSrc from './images/recover.png'
+import noDateSrc from './images/nodate.png'
+import deleteSrc from './images/delete.png'
+
 
 export default function drawTask(task){
-    //console.log("XXXXXXXXXXXXXXXX: ",task)
+    
     const taskEl = document.createElement('div')
     taskEl.classList.add('task-el')
     if(task.important=='true'){
-        console.log("TASK IMPORTANT")
         taskEl.classList.add('task-el-important')
+    }
+    if(task.isOverdue==true){
+        taskEl.classList.add('overdue')
     }
         const isDone = document.createElement('input')
         isDone.type = 'checkbox'
@@ -49,7 +57,11 @@ export default function drawTask(task){
 
         const taskDate = document.createElement('div')
         taskDate.classList.add('task-date') 
-        if(isNaN(task.date)) taskDate.textContent='no deadline'
+        if(isNaN(task.date)){
+            const noDeadlineImg = new Image()
+            noDeadlineImg.src = noDateSrc 
+            taskDate.appendChild(noDeadlineImg)
+        }
         
         else{
             if(isPast(task.date) && !isToday(task.date)){
@@ -72,27 +84,35 @@ export default function drawTask(task){
         const showBtn = document.createElement('div')
         showBtn.classList.add('show-btn')
         showBtn.classList.add('btn')
-        showBtn.textContent = 'SHOW'
+        const moreImg = new Image()
+        moreImg.src = moreSrc
+        showBtn.appendChild(moreImg)
         taskEl.appendChild(showBtn)
 
         showBtn.addEventListener('click',drawShowModal)
 
-
+        
 
     return taskEl
 }
 
 export function drawTaskInTrash(task){
     const taskEl = drawTask(task)
-
+    taskEl.classList.add('task-in-trash-el')
     taskEl.removeChild(taskEl.querySelector('.show-btn'))
-    
+
+    const buttons = document.createElement('div')
+    buttons.classList.add('buttons')
+
+
     const recoverBtn = document.createElement('div')
         recoverBtn.classList.add('recover-btn')
         recoverBtn.classList.add('btn')
-        recoverBtn.innerText='Recover'
-        taskEl.appendChild(recoverBtn)
+        const recoverImg = new Image()
+        recoverImg.src = recoverSrc
+        recoverBtn.appendChild(recoverImg)
 
+    buttons.appendChild(recoverBtn)
         recoverBtn.addEventListener('click',()=>{
             
             Task.trash = Task.trash.filter(t=>t.title!=task.title)
@@ -107,17 +127,23 @@ export function drawTaskInTrash(task){
     const permDelete=document.createElement('div')
         permDelete.classList.add('recover-btn')
         permDelete.classList.add('btn')
-        permDelete.innerText = 'Permanent Delete'
+        const deleteImg = new Image()
+        deleteImg.src = deleteSrc
+
+        permDelete.appendChild(deleteImg)
 
         permDelete.addEventListener('click', ()=>{
-            Task.history.filter(t => t.title!=task.title)
-
+            Task.history = Task.history.filter(t => t.title!=task.title)
+            Task.trash = Task.trash.filter(t => t.title!=task.title)
+            
+            refresh()
         })
 
 
 
-        taskEl.appendChild(permDelete)
+        buttons.appendChild(permDelete)
 
+        taskEl.appendChild(buttons)
 
     
     return taskEl
@@ -195,7 +221,9 @@ export function drawAddProject(){
         const newBtn = document.createElement('div')
         newBtn.classList.add('new-btn')
         newBtn.classList.add('btn')
-        newBtn.textContent="NEW PROJECT"
+        const addImg = new Image()
+        addImg.src  = addSrc
+        newBtn.appendChild(addImg)
         projectEl.appendChild(newBtn)
 
         newBtn.addEventListener('click',drawNewProjectModal)
@@ -209,7 +237,9 @@ export function drawAddTaskEl(){
         const newBtn = document.createElement('div')
         newBtn.classList.add('new-btn')
         newBtn.classList.add('btn')
-        newBtn.textContent="NEW"
+        const addImg =new Image()
+        addImg.src = addSrc
+        newBtn.appendChild(addImg)
         taskEl.appendChild(newBtn)
 
         newBtn.addEventListener('click',drawAddModal)
@@ -257,6 +287,20 @@ export function drawProjectInTrash(project){
             refresh()
             
         })
+        const permDelete=document.createElement('div')
+        permDelete.classList.add('recover-btn')
+        permDelete.classList.add('recover-btn-project')
+        permDelete.classList.add('btn')
+        permDelete.innerText = 'Permanent Delete'
+
+        permDelete.addEventListener('click', ()=>{
+            Project.history = Project.history.filter(p => p.title!=project.title)
+            Project.trash = Project.trash.filter(p => p.title!=project.title)
+            
+            refresh()
+        })
+
+        projectEl.appendChild(permDelete)
 
 
     
@@ -272,7 +316,8 @@ function drawAddModal(){
 
 function drawShowModal(e){
     const main = document.querySelector("#main")
-    let taskTitle = e.target.parentElement.children[1].textContent
+    console.log(e.target.parentElement.children)
+    let taskTitle = e.target.parentElement.parentElement.children[1].textContent
     let task = Task.tasks.find(t => t._title==taskTitle)
     
     main.appendChild(showModal(task))

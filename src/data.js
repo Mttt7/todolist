@@ -1,4 +1,5 @@
 //import {  format } from 'date-fns'
+import { isPast } from 'date-fns'
 
 export class Project{
     static projects = []
@@ -37,7 +38,12 @@ export class Task{
         this._important = important
         this._project = project
         this._isDone = false
-
+        if(isPast(this._date)){
+            this._isOverdue = true
+        }else{
+            this._isOverdue = false
+        }
+        
         Task.tasks.push(this)
         Task.history.push(this)
     }
@@ -48,6 +54,7 @@ export class Task{
     get important(){ return this._important}
     get project(){ return this._project}
     get isDone(){return this._isDone}
+    get isOverdue(){return this._isOverdue}
 
     set title(title){this._title=title}
     set description(description){ this._description=description}
@@ -55,7 +62,7 @@ export class Task{
     set important(important){this._important = important}
     set project(project){ this._project=project}
     set isDone(isDone){this._isDone=isDone}
-
+    set isOverdue(isOverdue){this._isOverdue=isOverdue}
     
 
 }

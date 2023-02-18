@@ -8,6 +8,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 10fr;
   grid-template-rows: 100px 1fr 1fr;
+  overflow: hidden;
 }
 
 .header {
@@ -55,13 +56,14 @@ body {
   grid-row: 2/3;
   height: 100%;
   width: 100%;
-  background-color: rgb(244, 238, 238);
+  background-color: rgb(244, 244, 248);
   font-size: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.45rem;
   padding: 1rem;
+  padding-bottom: 0;
   -webkit-animation: fade 0.2s;
           animation: fade 0.2s;
 }
@@ -69,19 +71,26 @@ body {
   transform: scale(1.05);
   cursor: pointer;
 }
-.mobile-nav.is-active .links .ig-img {
-  width: 30px;
+.mobile-nav.is-active .links {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.mobile-nav.is-active .links .ig-img:hover {
-  cursor: pointer;
-  transform: scale(1.03);
-}
-.mobile-nav.is-active .links .github-img {
+.mobile-nav.is-active .links .mobile-ig-img {
   width: 60px;
 }
-.mobile-nav.is-active .links .github-img:hover {
+.mobile-nav.is-active .links .mobile-ig-img:hover {
+  transform: scale(1.1);
   cursor: pointer;
-  transform: scale(1.03);
+}
+.mobile-nav.is-active .links .mobile-github-img {
+  width: 60px;
+}
+.mobile-nav.is-active .links .mobile-github-img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 @-webkit-keyframes fade {
@@ -102,7 +111,7 @@ body {
   }
 }
 .nav-bar {
-  background-color: rgb(244, 238, 238);
+  background-color: rgb(244, 244, 248);
   font-size: 1.35rem;
   grid-column: 1;
   grid-row: 2/4;
@@ -110,6 +119,7 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
+  padding-bottom: 0;
   height: 100%;
   width: 160px;
 }
@@ -135,6 +145,7 @@ body {
 .main {
   grid-column: 2/4;
   grid-row: 2/4;
+  overflow: auto;
 }
 
 .main.shrink {
@@ -142,25 +153,36 @@ body {
   padding-top: 2rem;
 }
 
-.all-container {
-  gap: 1rem;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  gap: 1rem;
   padding: 2rem;
+  overflow: auto;
+}
+
+.task-in-trash-el {
+  justify-content: space-evenly;
+  padding: 0 1rem;
+}
+.task-in-trash-el .buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .task-el {
+  border: solid 2px black;
+  background: linear-gradient(107deg, rgb(0, 81, 255) 2%, rgba(59, 213, 172, 0.9861111111) 44%, rgba(255, 30, 158, 0.0671296296) 100%);
   display: flex;
   align-items: center;
   gap: 1rem;
   width: 450px;
   height: 50px;
-  background-color: rgb(244, 238, 238);
+  background-color: rgb(244, 244, 248);
   border-radius: 20px;
   padding: 0 0.7rem;
 }
@@ -169,26 +191,24 @@ body {
   width: 25px;
   margin: 1rem;
 }
-.task-el .show-btn,
-.task-el .recover-btn {
+.task-el .task-date {
   margin-left: auto;
-  color: white;
-  background-color: red;
-  padding: 0.4rem;
-  border-radius: 10px;
-  font-weight: 600;
+  color: rgb(244, 244, 248);
+  font-weight: 700;
+}
+.task-el .task-date > img {
+  width: 37px;
 }
 
 .task-el-important {
-  background-color: #02f32e;
+  background: linear-gradient(107deg, rgba(213, 59, 59, 0.9861111111) 2%, rgba(213, 59, 117, 0.9861111111) 44%, rgba(255, 30, 158, 0.1342592593) 100%);
+  color: rgb(244, 244, 248);
+  font-weight: 700;
+  border: solid 2px black;
 }
 
-.trash-container {
-  gap: 1rem;
-}
-
-.projects-container {
-  gap: 1rem;
+.task-el.overdue .task-date {
+  color: rgb(221, 76, 61);
 }
 
 .project-el {
@@ -197,8 +217,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
-  background: rgb(99, 168, 58);
-  background: linear-gradient(107deg, rgb(99, 168, 58) 2%, rgb(47, 224, 202) 100%);
+  background: linear-gradient(107deg, rgb(168, 58, 163) 2%, rgba(84, 190, 252, 0.5300925926) 67%, rgba(30, 232, 255, 0) 100%);
   padding: 2rem;
   border-radius: 20px;
 }
@@ -229,21 +248,18 @@ body {
   margin-top: 1rem;
   width: 450px;
   height: 50px;
-  background-color: rgb(244, 238, 238);
+  background-color: rgb(244, 244, 248);
   border-radius: 20px;
   padding: 0 0.7rem;
+  background: linear-gradient(107deg, rgb(0, 81, 255) 2%, rgba(59, 213, 172, 0.9861111111) 44%, rgba(255, 30, 158, 0.0671296296) 100%);
 }
 
 .add-project-el {
-  background: rgb(99, 168, 58);
-  background: linear-gradient(107deg, rgb(99, 168, 58) 2%, rgb(47, 224, 202) 100%);
+  background: linear-gradient(107deg, rgb(168, 58, 163) 2%, rgba(84, 190, 252, 0.5300925926) 67%, rgba(30, 232, 255, 0) 100%);
 }
 
 .recover-btn,
 .new-btn {
-  background-color: rgb(221, 76, 61);
-  color: white;
-  background-color: red;
   padding: 0.4rem;
   border-radius: 10px;
   font-weight: 600;
@@ -253,11 +269,28 @@ body {
   cursor: pointer;
 }
 
+.btn > * {
+  height: 30px;
+}
+
 .btn:hover {
   transform: scale(1.05);
 }
 
+#modal-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  z-index: 5;
+  opacity: 80%;
+}
+
 .modal {
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -268,19 +301,21 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 50%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   border-radius: 20px;
-  background-color: gray;
+  background: rgb(244, 244, 248);
+  z-index: 10;
 }
 .modal .text-form {
   padding: 9px;
   font-size: 22px;
   border-width: 0px;
-  border-color: #ed0000;
-  background-color: #ffffff;
+  background-color: rgb(244, 244, 248);
   color: #000000;
   border-style: solid;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(66, 66, 66, 0.2);
   text-shadow: 0px 0px 0px rgba(66, 66, 66, 0.75);
   margin-top: 1rem;
@@ -306,7 +341,7 @@ body {
   background-color: #ffffff;
   color: #000000;
   border-style: solid;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(66, 66, 66, 0.2);
   text-shadow: 0px 0px 0px rgba(66, 66, 66, 0.75);
   margin-top: 1rem;
@@ -319,7 +354,7 @@ body {
   background-color: #ffffff;
   color: #000000;
   border-style: solid;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0px 0px 8px rgba(66, 66, 66, 0.2);
   text-shadow: 0px 0px 0px rgba(66, 66, 66, 0.75);
   margin-top: 1rem;
@@ -340,10 +375,14 @@ body {
   cursor: pointer;
 }
 .modal .not-important {
-  color: #ed0000;
+  background: -webkit-linear-gradient(107deg, rgb(168, 58, 58) 2%, rgb(235, 148, 105) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .modal .important {
-  color: #02f32e;
+  background: -webkit-linear-gradient(107deg, rgb(99, 168, 58) 2%, rgb(105, 235, 219) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .modal .close-modal {
   display: inline-block;
@@ -354,11 +393,17 @@ body {
   width: 30px;
   height: 30px;
 }
+.modal .close-modal:hover .line:first-child {
+  transform: rotate(230deg);
+}
+.modal .close-modal:hover .line:last-child {
+  transform: rotate(140deg);
+}
 .modal .line {
   position: absolute;
   width: 100%;
   height: 5px;
-  background-color: white;
+  background-color: rgb(221, 76, 61);
   transition: transform 0.2s ease;
 }
 .modal .line:first-child {
@@ -368,16 +413,14 @@ body {
   transform: rotate(-45deg);
 }
 .modal .btn {
-  color: rgb(254, 254, 254);
+  color: rgb(230, 230, 234);
   font-weight: 600;
   background-color: rgb(221, 76, 61);
-  padding: 0.5rem 5rem;
+  padding: 1.1rem 5rem;
   border-radius: 20px;
-  margin-top: auto;
   margin-bottom: 1rem;
 }
 .modal .delete-btn {
-  margin-top: 0;
   margin-bottom: 0.3rem;
 }
 
@@ -387,11 +430,15 @@ body {
   }
 }
 @media only screen and (max-width: 700px) {
+  .container {
+    overflow: hidden;
+  }
   .nav-bar {
     display: none;
   }
   .task-el {
-    width: 300px;
+    width: 90%;
+    height: 100%;
   }
   .add-task-el {
     width: 300px;
@@ -400,6 +447,22 @@ body {
     grid-column: 1/4;
   }
 }
+.main::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.main::-webkit-scrollbar-track {
+  background-color: rgb(230, 230, 234);
+  border-radius: 100vw;
+  -webkit-margin-before: 0.5em;
+          margin-block-start: 0.5em;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: rgb(221, 76, 61);
+  border-radius: 100vw;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

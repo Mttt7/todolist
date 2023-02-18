@@ -4,13 +4,18 @@ import loadTrash from './trash.js'
 import loadCompleted from './completed.js'
 import githubImg from './images/githublogo.png'
 import igImg from './images/iglogo.png'
-import loadToday from './today';
-import loadThisWeek from './thisWeek';
-import loadOverdue from './overdue';
-import loadProjects from './projects';
+import loadToday from './today'
+import loadThisWeek from './thisWeek'
+import loadOverdue from './overdue'
+import loadProjects from './projects'
 
 
 const content = document.querySelector("#content")
+const modalBackground = document.createElement('div')
+modalBackground.id='modal-background'
+
+content.appendChild(modalBackground)
+
 
 const GithubImg = new Image()
 const IgImg = new Image()
@@ -32,22 +37,40 @@ function createHeader(){
                 //line.classList.add('line')
                 reponsiveNav.appendChild(line)
             }
-            let NavBarToClone = createNavBar()
-            const mobileNav = NavBarToClone.cloneNode(true)
+
+            const mobileNav = createNavBar()
+            //const mobileNav = NavBarToClone.cloneNode(true)
             mobileNav.id="mobile-nav"
             mobileNav.classList.add('mobile-nav')
             mobileNav.classList.remove("nav-bar")
             
 
+
+            const links = mobileNav.querySelector('.links')
+            
+            const igImage = document.createElement('img')
+            igImage.classList.add('mobile-ig-img')
+            igImage.src = igImg
+             
+            const githubImage = document.createElement('img')
+            githubImage.classList.add('mobile-github-img')
+            githubImage.src = githubImg
+            
+
+            links.appendChild(githubImage)
+            links.appendChild(igImage)
+                
+                githubImage.addEventListener('click',()=>{
+                    window.open("https://github.com/Mttt7/restaurantpage","_self")
+                })
+                igImage.addEventListener('click',()=>{
+                    window.open("https://www.instagram.com/mtt.jpeg/","_self")
+                })
+
+            
+
+
             content.appendChild(mobileNav)
-
-            
-
-
-            
-
-
-
             header.appendChild(reponsiveNav)
 
 
@@ -195,7 +218,6 @@ function InitializeWebsite(){
 }
 
 InitializeWebsite()
-loadProjects()
+loadAll()
 
 
-console.log('working fine')

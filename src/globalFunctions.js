@@ -21,7 +21,11 @@ function currentWindow(){
 }
 
 export function refresh(){
-    console.log("###refreshing: ")
+    const modalBackground = document.querySelector('#modal-background')
+    modalBackground.style.display='none'
+
+
+
     if(currentWindow()=='All') loadAll()
     if(currentWindow()=='Trash') loadTrash()
     if(currentWindow()=='Completed') loadCompleted()
