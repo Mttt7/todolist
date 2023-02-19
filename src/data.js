@@ -1,5 +1,12 @@
 //import {  format } from 'date-fns'
 import { isPast } from 'date-fns'
+import { refresh, sortTasks } from './globalFunctions.js';
+
+
+
+
+
+
 
 export class Project{
     static projects = []
@@ -11,6 +18,7 @@ export class Project{
         this._tasks = tasks
         Project.projects.push(this)
         Project.history.push(this)
+        
         
     }
 
@@ -43,6 +51,8 @@ export class Task{
         }else{
             this._isOverdue = false
         }
+
+        
         
         Task.tasks.push(this)
         Task.history.push(this)

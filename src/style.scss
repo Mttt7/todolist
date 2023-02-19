@@ -209,7 +209,7 @@ body{
     gap:1rem;
     padding: 2rem;
     overflow: auto;
-   
+   overflow-x: hidden;
 }
 
 //drawing.js
@@ -247,7 +247,7 @@ body{
         height: 25px;
         width: 25px;
         margin: 1rem;
-        
+        accent-color: rgb(27, 235, 27);
     }
 
     .task-date{
@@ -276,6 +276,8 @@ body{
 .task-el.overdue{
     .task-date{
         color:$color1;
+        font-weight: 800;
+        
     }
     
 }

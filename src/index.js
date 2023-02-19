@@ -25,7 +25,7 @@ IgImg.src = igImg
 function createHeader(){
     const header = document.createElement('div')
     header.classList.add("header")
-        header.textContent="To do List"
+        header.textContent="To do List 1.0"
 
 
 

@@ -5,11 +5,7 @@ import {drawAddTaskEl} from './drawing.js'
 import { refresh, sortTasks } from './globalFunctions.js'
 
 
-const p1 = new Project('projekt1','opis projektu',[])
-const p2 = new Project('projekt2','opis projektu',[])
-const p3 = new Project('projekt3','opis projektu',[])
-//const t1 = new Task('zadanie1','description','11-11-2023',false,'projekt1')
-//addToProject(t1,'projekt1')
+
             
 
 function drawAll(){
